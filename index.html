@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoPlay | Fun with Nature!</title>
+    <title>EcoPlay | Your Nature Quest!</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,9 +30,8 @@
             background-color: #F0F8FF; 
             min-height: 100vh;
             box-shadow: 0 0 25px rgba(0,0,0,0.2);
-            overflow-x: hidden;
             border-radius: 0 0 30px 30px;
-            padding-bottom: 30px;
+            padding-bottom: 40px;
             position: relative;
         }
         .score-badge {
@@ -51,35 +50,33 @@
         .header {
             background-color: var(--primary);
             color: white;
-            padding: 35px 20px 25px;
+            padding: 40px 20px 30px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .header h1 {
-            margin: 0;
-            font-size: 36px;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-        }
-        .header p {
-            margin: 10px 0 0 0;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        .content {
-            padding: 20px;
-        }
-        h2 {
-            font-size: 22px;
+        .header h1 { margin: 0; font-size: 38px; text-shadow: 2px 2px 0px rgba(0,0,0,0.2); }
+        
+        .quest-title {
+            font-size: 24px;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 30px 10px 15px;
             color: #2c3e50;
+            font-weight: 600;
+            line-height: 1.2;
         }
+        .quest-title span {
+            display: block;
+            font-size: 16px;
+            color: #555;
+            margin-top: 5px;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
+            padding: 0 20px;
         }
         .card {
             background: var(--card-bg);
@@ -88,239 +85,83 @@
             text-align: center;
             cursor: pointer;
             box-shadow: 0 6px 0px #D3D3D3;
-            transition: transform 0.1s, box-shadow 0.1s;
-            border: 3px solid transparent;
+            transition: transform 0.1s;
         }
-        .card:active {
-            transform: translateY(6px);
-            box-shadow: 0 0px 0px #D3D3D3;
-        }
-        .card.selected-nature {
-            border-color: var(--primary);
-            background-color: #FFF3E0;
-            box-shadow: 0 6px 0px var(--primary);
-        }
-        .card.selected-paper {
-            border-color: var(--paper-blue);
-            background-color: #E0F7FA;
-            box-shadow: 0 6px 0px var(--paper-blue);
-        }
-        .card-emoji { font-size: 50px; margin-bottom: 10px; }
-        .card-title { font-weight: 600; font-size: 15px; }
-        .btn {
+        .card:active { transform: translateY(6px); box-shadow: 0 0px 0px transparent; }
+        .card.selected-nature { border: 4px solid var(--primary); background-color: #FFF3E0; }
+        .card.selected-paper { border: 4px solid var(--paper-blue); background-color: #E0F7FA; }
+        .card-emoji { font-size: 50px; }
+
+        .btn-main {
             display: block;
-            width: 100%;
+            width: 80%;
+            margin: 25px auto;
             background-color: var(--accent);
-            color: var(--text-dark);
             border: 4px solid #FBC02D;
             padding: 18px;
             border-radius: 40px;
             font-size: 22px;
             font-weight: 600;
-            margin-top: 20px;
             cursor: pointer;
             box-shadow: 0 6px 0px #FBC02D;
             font-family: inherit;
         }
-        .btn-paper {
-            background-color: var(--paper-blue);
-            border-color: #0097A7;
-            color: white;
-            box-shadow: 0 6px 0px #0097A7;
-        }
-        .btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0px 0px transparent;
-        }
-        .divider {
-            height: 4px;
-            background-color: #E0E0E0;
-            margin: 35px 0 25px 0;
-            border-radius: 2px;
-        }
+
+        /* Interactive Step Section */
         #result-section {
             display: none;
-            margin-top: 30px;
+            margin: 30px 20px;
             background: white;
-            padding: 25px 15px;
+            padding: 25px;
             border-radius: 25px;
             border: 4px solid var(--green);
-        }
-        .eco-badge {
-            background-color: var(--green);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 600;
-            display: block;
             text-align: center;
+        }
+        .step-box {
+            background: #fdfdfd;
+            border: 2px dashed #ddd;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 15px 0;
+        }
+        .step-img-tag {
+            background: #eee;
+            color: #777;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 10px;
             margin-bottom: 15px;
+            font-style: italic;
         }
-        .step-container {
+        .step-nav {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+            justify-content: space-between;
+            gap: 10px;
         }
-        .step-card {
-            background: #F9F9F9;
-            border-radius: 15px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--primary);
-        }
-        .step-number {
-            background: var(--primary);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        .step-icon { font-size: 35px; margin: 0 15px; flex-shrink: 0; }
-        .step-text { font-size: 18px; color: #444; line-height: 1.4; }
-        
-        .btn-claim {
-            background-color: #4CAF50;
-            color: white;
+        .btn-step {
+            flex: 1;
+            padding: 12px;
+            border-radius: 20px;
             border: none;
-            width: 100%;
-            padding: 15px;
-            border-radius: 30px;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-            cursor: pointer;
-            box-shadow: 0 6px 0px #2E7D32;
             font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
         }
-        .btn-claim:active {
-            transform: translateY(6px);
-            box-shadow: 0 0px 0px transparent;
-        }
+        .btn-next { background: var(--green); color: white; }
 
-        /* AI Chatbox Styles */
+        /* Chatbox */
         .chat-container {
-            margin-top: 40px;
+            margin: 40px 20px;
             background-color: white;
             border-radius: 25px;
             border: 4px solid var(--paper-blue);
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
-        .chat-header {
-            background-color: var(--paper-blue);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 600;
-            margin: 0;
-        }
-        .chat-window {
-            height: 250px;
-            background-color: var(--chat-bg);
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .chat-msg {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 16px;
-            line-height: 1.4;
-        }
-        .bot-msg { background-color: white; align-self: flex-start; border-bottom-left-radius: 5px; }
-        .user-msg { background-color: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
-        .typing-indicator { font-style: italic; color: #888; font-size: 14px; }
-        .suggestion-area {
-            display: flex;
-            gap: 10px;
-            padding: 10px 15px;
-            background-color: #E0F7FA;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        .chip {
-            background-color: white;
-            border: 2px solid var(--paper-blue);
-            color: #0097A7;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-family: inherit;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            background-color: white;
-            border-top: 2px solid #EEE;
-        }
-        .chat-input {
-            flex-grow: 1;
-            border: 2px solid #CCC;
-            border-radius: 20px;
-            padding: 10px 15px;
-            font-family: inherit;
-            font-size: 16px;
-            outline: none;
-        }
-        .chat-btn {
-            background-color: var(--paper-blue);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            margin-left: 10px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .idea-box {
-            margin-top: 40px;
-            background-color: #FFF9C4; 
-            padding: 20px;
-            border-radius: 20px;
-            border: 3px dashed #FBC02D;
-            text-align: center;
-        }
-        .idea-box h3 { margin-top: 0; }
-        .input-field {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 2px solid #FFE082;
-            border-radius: 10px;
-            font-family: inherit;
-            box-sizing: border-box;
-        }
-        .btn-small {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 0px #E65100;
-            font-family: inherit;
-        }
+        .chat-header { background: var(--paper-blue); color: white; padding: 15px; text-align: center; margin: 0; }
+        .chat-window { height: 200px; background: var(--chat-bg); padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .chat-msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; }
+        .bot-msg { background: white; align-self: flex-start; }
+        .user-msg { background: var(--primary); color: white; align-self: flex-end; }
     </style>
 </head>
 <body>
@@ -330,197 +171,124 @@
 
     <div class="header">
         <h1>✨ EcoPlay ✨</h1>
-        <p>Make toys from nature!</p>
+        <p>Your Nature Adventure!</p>
     </div>
 
     <div class="content">
-        <h2>Nature Finds! 🌿</h2>
+        <h2 class="quest-title">Look around you! 🌲<span>What can you find on the ground?</span></h2>
         
-        <div class="grid" id="nature-grid">
-            <div class="card" onclick="selectItem('leaf', 'nature', this)">
-                <div class="card-emoji">🌿</div>
-                <div class="card-title">Leaf Whistle</div>
-            </div>
-            <div class="card" onclick="selectItem('snake', 'nature', this)">
-                <div class="card-emoji">🐍</div>
-                <div class="card-title">Ola Snake</div>
-            </div>
-            <div class="card" onclick="selectItem('shell', 'nature', this)">
-                <div class="card-emoji">🥥</div>
-                <div class="card-title">Coconut Shoes</div>
-            </div>
-            <div class="card" onclick="selectItem('sheath', 'nature', this)">
-                <div class="card-emoji">🍂</div>
-                <div class="card-title">Leaf Sled</div>
-            </div>
-            <div class="card" onclick="selectItem('mango', 'nature', this)">
-                <div class="card-emoji">🥭</div>
-                <div class="card-title">Mango Seed</div>
-            </div>
-            <div class="card" onclick="selectItem('banana', 'nature', this)">
-                <div class="card-emoji">🍌</div>
-                <div class="card-title">Banana Boat</div>
-            </div>
+        <div class="grid">
+            <div class="card" onclick="selectItem('leaf', 'nature', this)"><div class="card-emoji">🌿</div><div>Leaf</div></div>
+            <div class="card" onclick="selectItem('snake', 'nature', this)"><div class="card-emoji">🐍</div><div>Ola Snake</div></div>
+            <div class="card" onclick="selectItem('shell', 'nature', this)"><div class="card-emoji">🥥</div><div>Coconut</div></div>
+            <div class="card" onclick="selectItem('mango', 'nature', this)"><div class="card-emoji">🥭</div><div>Mango Seed</div></div>
         </div>
+        <button class="btn-main" onclick="startBuilding('nature')">Let's Build! 🚀</button>
 
-        <button class="btn" onclick="generateToy('nature')">Let's Build It! 🚀</button>
-
-        <div class="divider"></div>
-
-        <h2>Origami Fun! 📄</h2>
-        
-        <div class="grid" id="paper-grid">
-            <div class="card" onclick="selectItem('plane', 'paper', this)">
-                <div class="card-emoji">✈️</div>
-                <div class="card-title">Paper Plane</div>
-            </div>
-            <div class="card" onclick="selectItem('boat', 'paper', this)">
-                <div class="card-emoji">⛵</div>
-                <div class="card-title">Paper Boat</div>
-            </div>
-            <div class="card" onclick="selectItem('dog', 'paper', this)">
-                <div class="card-emoji">🐶</div>
-                <div class="card-title">Dog Face</div>
-            </div>
-            <div class="card" onclick="selectItem('frog', 'paper', this)">
-                <div class="card-emoji">🐸</div>
-                <div class="card-title">Jumping Frog</div>
-            </div>
+        <h2 class="quest-title">Got some old paper? 📄<span>Let's recycle it into fun!</span></h2>
+        <div class="grid">
+            <div class="card" onclick="selectItem('boat', 'paper', this)"><div class="card-emoji">⛵</div><div>Boat</div></div>
+            <div class="card" onclick="selectItem('frog', 'paper', this)"><div class="card-emoji">🐸</div><div>Jumping Frog</div></div>
         </div>
-
-        <button class="btn btn-paper" onclick="generateToy('paper')">Let's Fold It! ✂️</button>
+        <button class="btn-main" style="background:#00BCD4; border-color:#0097A7; color:white;" onclick="startBuilding('paper')">Let's Fold! ✂️</button>
 
         <div id="result-section">
-            <div class="eco-badge" id="eco-impact">🌍 You saved the Earth!</div>
-            <h2 id="toy-title">Toy Name</h2>
-            <div class="step-container" id="toy-steps"></div>
-            <button class="btn-claim" id="claimBtn" onclick="claimPoints()">I Built It! ✅ (+50 pts)</button>
+            <div class="eco-badge">🌍 Planet Hero Quest!</div>
+            <h2 id="toy-title" style="margin-top:10px">Toy Name</h2>
+            
+            <div class="step-box">
+                <div id="step-img" class="step-img-tag"></div>
+                <div id="step-text" style="font-size:20px; margin-bottom:10px">Step 1: ...</div>
+                <p id="step-ask" style="color:var(--green); font-weight:bold;"></p>
+            </div>
+
+            <div class="step-nav">
+                <button class="btn-step" style="background:#ddd" onclick="prevStep()">Back</button>
+                <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">I did it! Next →</button>
+            </div>
         </div>
 
         <div class="chat-container">
-            <h3 class="chat-header">🤖 Ask EcoBot!</h3>
+            <h3 class="chat-header">🤖 Need help? Ask EcoBot!</h3>
             <div class="chat-window" id="chatWindow">
-                <div class="chat-msg bot-msg">Hi! I'm EcoBot. Try the new Ola Snake! 🐍</div>
+                <div class="chat-msg bot-msg">Pick an item to start your quest! 🍃</div>
             </div>
-            <div class="suggestion-area">
-                <button class="chip" onclick="sendQuickReply('How does the Ola Snake work?')">How does the Ola Snake work?</button>
-                <button class="chip" onclick="sendQuickReply('What can I build?')">What can I build?</button>
-                <button class="chip" onclick="sendQuickReply('Tell me a joke!')">Tell me a joke!</button>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" class="chat-input" placeholder="Type here..." onkeypress="handleKeyPress(event)">
-                <button class="chat-btn" onclick="sendMessage()">▶</button>
-            </div>
-        </div>
-
-        <div class="idea-box">
-            <h3>💡 Share your own idea!</h3>
-            <input type="text" id="userName" class="input-field" placeholder="Your Name">
-            <input type="text" id="toyNameInput" class="input-field" placeholder="Toy Name">
-            <textarea id="toyIdea" class="input-field" placeholder="How to make it?" style="height:80px;"></textarea>
-            <button class="btn-small" onclick="sendIdea()">Send Idea 💌</button>
         </div>
     </div>
 </div>
 
 <script>
+    let currentStep = 0;
     let selectedItem = "";
     let selectedCategory = "";
     let userScore = 0;
+    let activeSteps = [];
 
-    const natureDatabase = {
-        'snake': { title: "Ola Snake! 🐍", impact: "🌟 Saved 100g of plastic!", steps: [{ text: "Take two long strips of coconut leaf.", icon: "🌿" }, { text: "Place them at a 90-degree angle at one end.", icon: "📐" }, { text: "Fold the bottom strip over the top one repeatedly.", icon: "🔁" }, { text: "Keep zigzag-folding until you reach the end.", icon: "📏" }, { text: "Hold one end and pull the other—it snaps like a snake!", icon: "🐍" }] },
-        'leaf': { title: "Leaf Whistle! 🎵", impact: "🌟 Saved 50g of plastic!", steps: [{ text: "Find a green leaf.", icon: "🌿" }, { text: "Roll it like an ice cream cone!", icon: "🍦" }, { text: "Pin it with a tiny stick.", icon: "📌" }, { text: "Blow hard!", icon: "💨" }] },
-        'shell': { title: "Coconut Shoes! 🎪", impact: "🌟 Saved 500g of plastic!", steps: [{ text: "Get two coconut shells.", icon: "🥥" }, { text: "Poke a hole in each.", icon: "🕳️" }, { text: "Thread a rope through.", icon: "🧵" }, { text: "Stand and walk!", icon: "🚶‍♂️" }] },
-        'sheath': { title: "Leaf Sled! 🛷", impact: "🌟 Saved 2kg of plastic!", steps: [{ text: "Find a dry Paala leaf.", icon: "🍂" }, { text: "Sit inside the bowl part.", icon: "🧘‍♂️" }, { text: "Ask a friend to pull you!", icon: "🏃‍♀️" }] },
-        'mango': { title: "Mango Whistle! 🎶", impact: "🌟 Saved 50g of plastic!", steps: [{ text: "Wash a mango seed.", icon: "🥭" }, { text: "Rub sides on a rock.", icon: "🪨" }, { text: "Remove the soft inside.", icon: "🤏" }, { text: "Blow across it!", icon: "🌬️" }] },
-        'banana': { title: "Banana Boat! ⛵", impact: "🌟 Saved 200g of plastic!", steps: [{ text: "Peel a banana stem layer.", icon: "🍌" }, { text: "Add a stick for a mast.", icon: "📍" }, { text: "Add a leaf sail.", icon: "⛵" }, { text: "Float it!", icon: "🌊" }] }
+    const db = {
+        'leaf': { title: "Leaf Whistle", steps: [
+            { text: "Find a fresh green leaf.", img: "", ask: "Got your leaf? 🌿" },
+            { text: "Roll it tightly like a small tube.", img: "", ask: "Is it a tight roll? 🍦" },
+            { text: "Blow into the end to make a sound!", img: "", ask: "Did it make a sound? 🎶" }
+        ]},
+        'snake': { title: "Ola Snake", steps: [
+            { text: "Take two long strips of coconut leaf.", img: "", ask: "Got the strips? 🌿" },
+            { text: "Cross them at the bottom like an 'L'.", img: "", ask: "Are they crossed? 📐" },
+            { text: "Fold the bottom strip over the top one. Repeat!", img: "", ask: "Doing the zigzag? 🔁" },
+            { text: "Pull the ends to watch it snap!", img: "", ask: "Does it snap? 🐍" }
+        ]},
+        'frog': { title: "Jumping Frog", steps: [
+            { text: "Fold a square paper into a triangle.", img: "", ask: "Is it a triangle now? 🔺" },
+            { text: "Fold the sides to make legs.", img: "", ask: "Does it have legs? 🐸" },
+            { text: "Fold the bottom back to make a spring.", img: "", ask: "Ready to jump? 🦘" }
+        ]},
+        'boat': { title: "Paper Boat", steps: [
+            { text: "Fold your paper in half.", img: "", ask: "Done? 📄" },
+            { text: "Fold the corners to the middle to make a roof.", img: "", ask: "Looks like a house? 🏠" },
+            { text: "Open it up and pop the boat out!", img: "", ask: "Is it floating? ⛵" }
+        ]}
     };
 
-    const paperDatabase = {
-        'plane': { title: "Paper Plane! ✈️", impact: "♻️ Recycled paper!", steps: [{ text: "Fold in half.", icon: "📄" }, { text: "Fold corners to center.", icon: "📐" }, { text: "Fold wings down.", icon: "🦅" }, { text: "Fly it!", icon: "☁️" }] },
-        'boat': { title: "Paper Boat! ⛵", impact: "♻️ Recycled paper!", steps: [{ text: "Fold paper in half.", icon: "📄" }, { text: "Fold corners down.", icon: "⛺" }, { text: "Pop it open!", icon: "🌊" }] },
-        'dog': { title: "Dog Face! 🐶", impact: "♻️ Recycled paper!", steps: [{ text: "Fold a triangle.", icon: "🔺" }, { text: "Fold ears down.", icon: "👂" }, { text: "Draw a nose!", icon: "🖍️" }] },
-        'frog': { title: "Jumping Frog! 🐸", impact: "♻️ Recycled paper!", steps: [{ text: "Fold a bouncy spring shape.", icon: "🟩" }, { text: "Push to jump!", icon: "🦘" }] }
-    };
-
-    function selectItem(item, category, element) {
-        selectedItem = item;
-        selectedCategory = category;
-        document.querySelectorAll('.card').forEach(card => {
-            card.classList.remove('selected-nature', 'selected-paper');
-        });
-        element.classList.add(category === 'nature' ? 'selected-nature' : 'selected-paper');
+    function selectItem(item, cat, el) {
+        selectedItem = item; selectedCategory = cat;
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
+        el.classList.add(cat === 'nature' ? 'selected-nature' : 'selected-paper');
     }
 
-    function generateToy(btnCat) {
-        if (selectedItem === "" || selectedCategory !== btnCat) {
-            alert("Pick an item from this section first! ✨");
-            return;
-        }
-        let db = selectedCategory === 'nature' ? natureDatabase : paperDatabase;
-        let data = db[selectedItem];
-        document.getElementById("toy-title").innerText = data.title;
-        document.getElementById("eco-impact").innerText = data.impact;
-        let container = document.getElementById("toy-steps");
-        container.innerHTML = "";
-        data.steps.forEach((s, i) => {
-            let div = document.createElement("div");
-            div.className = "step-card";
-            div.innerHTML = `<div class="step-number">${i+1}</div><div class="step-icon">${s.icon}</div><div class="step-text">${s.text}</div>`;
-            container.appendChild(div);
-        });
-        document.getElementById("claimBtn").innerText = "I Built It! ✅ (+50 pts)";
-        document.getElementById("claimBtn").disabled = false;
+    function startBuilding(cat) {
+        if (!selectedItem || selectedCategory !== cat) { alert("Pick an item first! ✨"); return; }
+        activeSteps = db[selectedItem].steps;
+        currentStep = 0;
+        document.getElementById("toy-title").innerText = db[selectedItem].title;
+        showStep();
         document.getElementById("result-section").style.display = "block";
-        window.scrollBy({ top: 500, behavior: 'smooth' });
+        window.scrollBy({ top: 400, behavior: 'smooth' });
     }
 
-    function claimPoints() {
-        userScore += 50;
-        document.getElementById("scoreDisplay").innerText = "⭐ " + userScore;
-        document.getElementById("claimBtn").innerText = "Points Claimed! 🎉";
-        document.getElementById("claimBtn").disabled = true;
-        alert("50 Points! You're a Planet Hero! 🌍✨");
+    function showStep() {
+        const s = activeSteps[currentStep];
+        document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
+        document.getElementById("step-img").innerText = s.img;
+        document.getElementById("step-ask").innerText = s.ask;
+        document.getElementById("nextBtn").innerText = currentStep === activeSteps.length - 1 ? "Finish Quest! ✨" : "I did it! Next →";
     }
 
-    function sendIdea() {
-        alert("Thanks! We'll add your toy soon! 🎉");
-        document.getElementById("userName").value = "";
-        document.getElementById("toyNameInput").value = "";
-        document.getElementById("toyIdea").value = "";
+    function nextStep() {
+        if (currentStep < activeSteps.length - 1) {
+            currentStep++; showStep();
+        } else {
+            userScore += 50;
+            document.getElementById("scoreDisplay").innerText = "⭐ " + userScore;
+            alert("Quest Complete! You earned 50 Stars! ⭐");
+            document.getElementById("result-section").style.display = "none";
+        }
     }
 
-    function sendQuickReply(t) { document.getElementById("chatInput").value = t; sendMessage(); }
-    function handleKeyPress(e) { if(e.key === 'Enter') sendMessage(); }
+    function prevStep() { if (currentStep > 0) { currentStep--; showStep(); } }
+
     function sendMessage() {
-        let input = document.getElementById("chatInput");
-        let text = input.value.trim();
-        if(!text) return;
-        let win = document.getElementById("chatWindow");
-        let uDiv = document.createElement("div");
-        uDiv.className = "chat-msg user-msg";
-        uDiv.innerText = text;
-        win.appendChild(uDiv);
-        input.value = "";
-        win.scrollTop = win.scrollHeight;
-        setTimeout(() => {
-            let reply = getBotResponse(text.toLowerCase());
-            let bDiv = document.createElement("div");
-            bDiv.className = "chat-msg bot-msg";
-            bDiv.innerText = reply;
-            win.appendChild(bDiv);
-            win.scrollTop = win.scrollHeight;
-        }, 1000);
-    }
-
-    function getBotResponse(t) {
-        if(t.includes("snake")) return "The Ola Snake uses zigzag folds! When you pull it, the friction and springy leaf make it snap like a real cobra! 🐍";
-        if(t.includes("joke")) return "What did the tree wear to the pool party? ...Swimming trunks! 😂🌳";
-        if(t.includes("plastic")) return "Plastic is permanent, but nature is biodegradable. Building these toys keeps the Earth happy! 🌍";
-        return "I love that! Try building the Ola Snake to see cool physics in action! 🚀";
+        let text = document.getElementById("chatInput").value;
+        // Basic chat logic...
     }
 </script>
-
 </body>
 </html>
