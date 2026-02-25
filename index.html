@@ -41,56 +41,55 @@
         }
         .score-badge {
             position: absolute;
-            top: 25px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background-color: var(--accent);
             color: #000;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 30px;
             font-weight: 800;
-            font-size: 22px;
+            font-size: 18px;
             border: var(--outline);
             box-shadow: 4px 4px 0px #000;
             z-index: 10;
         }
         
-        /* HIGH CONTRAST HEADER */
+        /* HIGH CONTRAST HEADER - ALIGNED & STRAIGHT */
         .header {
             background-color: var(--secondary);
-            padding: 60px 20px 40px;
+            padding: 70px 20px 35px; /* Increased top padding to avoid badge overlap */
             text-align: center;
             border-bottom: var(--outline);
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             box-shadow: 0 8px 0px #000;
+            position: relative;
         }
         .header h1 { 
             margin: 0; 
-            font-size: 52px; 
+            font-size: 46px; 
             font-weight: 800;
             color: var(--accent); 
             text-shadow: 
-                -3px -3px 0 #000,  
-                 3px -3px 0 #000,
-                -3px  3px 0 #000,
-                 3px  3px 0 #000,
-                 6px  6px 0 #000;
-            letter-spacing: 2px;
-            transform: rotate(-3deg); 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000,
+                 4px  4px 0 #000;
+            letter-spacing: 1px;
             display: inline-block;
         }
         .header p {
-            margin: 25px auto 0;
-            font-size: 20px;
+            margin: 20px auto 0;
+            font-size: 18px;
             font-weight: 800;
             background: var(--primary);
             color: #FFF;
             display: inline-block;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 25px;
             border: 3px solid #000;
             box-shadow: 4px 4px 0px #000;
-            transform: rotate(2deg);
         }
         
         .quest-title {
@@ -174,31 +173,30 @@
             border-radius: 25px;
             margin: 25px 0;
         }
-        .step-img-container { 
+        
+        /* NEW MOTIVATION UI BOX */
+        .step-motivation-box { 
             width: 100%;
-            height: 250px;
-            background: #E0E0E0;
-            border-radius: 15px;
+            background: #E8F5E9;
+            border-radius: 20px;
             margin-bottom: 20px;
-            overflow: hidden;
-            border: 4px solid #000;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-            position: relative;
+            padding: 20px 0;
+            border: 4px dashed var(--accent);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        .step-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
+        .step-emoji {
+            font-size: 70px;
+            filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.1));
+            margin-bottom: 10px;
         }
-        .loading-text {
-            position: absolute;
+        .step-motivation-text {
+            font-size: 20px;
             font-weight: 800;
-            color: #666;
-            z-index: 1;
+            color: var(--secondary);
+            padding: 0 10px;
         }
 
         .step-nav { display: flex; justify-content: space-between; gap: 15px; }
@@ -280,9 +278,9 @@
             <div id="toy-benefit">🌍 Earth-Hero Fact: ...</div>
             
             <div class="step-box">
-                <div class="step-img-container">
-                    <div class="loading-text">Loading Image... 🎨</div>
-                    <img id="step-img-display" class="step-img" src="" alt="Step Illustration" style="position: relative; z-index: 2; opacity: 0;">
+                <div class="step-motivation-box">
+                    <div id="step-emoji" class="step-emoji">⭐</div>
+                    <div id="step-motivation" class="step-motivation-text">Awesome job!</div>
                 </div>
                 <div id="step-text" style="font-size:26px; font-weight: 800; color:#000; margin-bottom:15px">Step 1</div>
                 <p id="step-ask" style="color:var(--primary); font-size: 22px; font-weight:800;"></p>
@@ -323,61 +321,58 @@
     let userScore = 0; 
     let activeSteps = [];
 
-    // Helper function to call the AI Image Generator via URL
-    const genImg = (prompt) => `https://image.pollinations.ai/prompt/${encodeURIComponent('cute simple cartoon 2d flat vector illustration for kids, ' + prompt)}?width=400&height=300&nologo=true`;
-
     const db = {
         // --- NATURE TOYS ---
         'rocket': { 
             title: "Ola Rocket 🚀", 
             benefit: "Zero plastic! Coconut leaves are 100% organic, so they never leave harmful microplastics in our soil.",
             steps: [
-            { text: "Find one long, green coconut leaf.", img: genImg("single long green coconut tree leaf"), ask: "Got your super fuel leaf? 🌴" },
-            { text: "Carefully tear a small strip from the bottom end.", img: genImg("hands tearing a small strip from a green leaf"), ask: "Is it torn just a little bit? 🤏" },
-            { text: "Wrap the torn part around your pointer finger!", img: genImg("green leaf wrapped around a childs index finger"), ask: "Is it resting on your finger? ☝️" },
-            { text: "Pull the long part back tight, and let it go!", img: genImg("launching a green leaf toy rocket into the sky"), ask: "Did it reach the stars? 🌟" }
+            { text: "Find one long, green coconut leaf.", emoji: "🌴", ask: "Got your super fuel leaf?", motivation: "Great start, Planet Hero!" },
+            { text: "Carefully tear a small strip from the bottom end.", emoji: "🤏", ask: "Is it torn just a little bit?", motivation: "Nice and careful!" },
+            { text: "Wrap the torn part around your pointer finger!", emoji: "☝️", ask: "Is it resting on your finger?", motivation: "You're building something amazing!" },
+            { text: "Pull the long part back tight, and let it go!", emoji: "🚀", ask: "Did it reach the stars?", motivation: "Blast off! You did it!" }
         ]},
         'glasses': { 
             title: "Ola Shades 😎", 
             benefit: "Safe for your skin! No toxic chemical dyes or lead found in cheap plastic sunglasses.",
             steps: [
-            { text: "Grab a nice, long green coconut leaf!", img: genImg("a long green leaf"), ask: "Got your leaf ready? 🌿" },
-            { text: "Loop the leaf to make two round circles.", img: genImg("leaf bent into two circles like glasses"), ask: "Do you have two eye holes? 👀" },
-            { text: "Use the tiny leaf stick to pin the circles together.", img: genImg("pinning leaves together with a tiny wooden stick"), ask: "Are they pinned tight? 📌" },
-            { text: "Fold two pieces back for arms and try them on!", img: genImg("cool kid wearing green leaf sunglasses"), ask: "Looking super cool? 😎" }
+            { text: "Grab a nice, long green coconut leaf!", emoji: "🌿", ask: "Got your leaf ready?", motivation: "Let's make some cool shades!" },
+            { text: "Loop the leaf to make two round circles.", emoji: "👀", ask: "Do you have two eye holes?", motivation: "I can see you doing a great job!" },
+            { text: "Use the tiny leaf stick to pin the circles together.", emoji: "📌", ask: "Are they pinned tight?", motivation: "Almost ready for the sun!" },
+            { text: "Fold two pieces back for arms and try them on!", emoji: "😎", ask: "Looking super cool?", motivation: "You look like a movie star!" }
         ]},
         'snake': { 
             title: "Ola Snake 🐍", 
             benefit: "100% safe! Free from dangerous phthalates (chemicals that make plastic stretchy) which can make kids sick.",
             steps: [
-            { text: "Take two long green leaf strips.", img: genImg("two long green leaf strips lying flat"), ask: "Got the strips? 🌿" },
-            { text: "Cross them at the bottom like the letter 'L'.", img: genImg("two leaves crossed at 90 degree angle letter L"), ask: "Are they crossed? 📐" },
-            { text: "Fold bottom strip over top. Keep zigzagging!", img: genImg("hands folding leaves in a zigzag square pattern"), ask: "Is it getting thicker? 🔁" },
-            { text: "Hold the tail and pull the head!", img: genImg("zigzag folded leaf stretching out like a springy snake toy"), ask: "Did it snap? 🐍" }
+            { text: "Take two long green leaf strips.", emoji: "🌿", ask: "Got the strips?", motivation: "Time to make a wiggly friend!" },
+            { text: "Cross them at the bottom like the letter 'L'.", emoji: "📐", ask: "Are they crossed?", motivation: "Perfect shape!" },
+            { text: "Fold bottom strip over top. Keep zigzagging!", emoji: "🔁", ask: "Is it getting thicker?", motivation: "Keep folding, you're getting it!" },
+            { text: "Hold the tail and pull the head!", emoji: "🐍", ask: "Did it snap?", motivation: "Sssssuper job!" }
         ]},
         'leaf': { 
             title: "Leaf Whistle 🎵", 
             benefit: "No toxic plastic mouthpieces! Just pure, clean nature touching your lips.",
             steps: [
-            { text: "Find a fresh green leaf.", img: genImg("a fresh green leaf"), ask: "Got your leaf? 🌿" },
-            { text: "Roll it tightly into a cone shape.", img: genImg("leaf rolled up into a tiny ice cream cone shape"), ask: "Is it a tight roll? 🍦" },
-            { text: "Blow hard into the tiny end!", img: genImg("child blowing into the pointed end of a leaf whistle"), ask: "Did it toot? 🎶" }
+            { text: "Find a fresh green leaf.", emoji: "🍃", ask: "Got your leaf?", motivation: "Let's make some music!" },
+            { text: "Roll it tightly into a cone shape.", emoji: "🍦", ask: "Is it a tight roll?", motivation: "Roll it up tight!" },
+            { text: "Blow hard into the tiny end!", emoji: "💨", ask: "Did it toot?", motivation: "Beautiful music!" }
         ]},
         'mango': { 
             title: "Mango Toot 🥭", 
             benefit: "Circular Economy in action! We are turning farm food waste into a fun, biodegradable toy.",
             steps: [
-            { text: "Clean a hairy mango seed and rub it flat.", img: genImg("clean mango seed being rubbed on a flat rock"), ask: "Is it clean and flat? 🪨" },
-            { text: "Carefully scrape out the soft part inside.", img: genImg("hollowing out the inside of a mango seed"), ask: "Is it empty inside? 🤏" },
-            { text: "Blow across the top like a bottle!", img: genImg("blowing air across the opening of a mango seed to whistle"), ask: "Hear the loud whistle? 🎶" }
+            { text: "Clean a hairy mango seed and rub it flat.", emoji: "🪨", ask: "Is it clean and flat?", motivation: "Good scrubbing!" },
+            { text: "Carefully scrape out the soft part inside.", emoji: "🥭", ask: "Is it empty inside?", motivation: "You're a great explorer!" },
+            { text: "Blow across the top like a bottle!", emoji: "🎶", ask: "Hear the loud whistle?", motivation: "Loud and clear! Awesome!" }
         ]},
         'shell': { 
             title: "Nut Shoes 🥥", 
             benefit: "Super strong and 100% natural! When they finally break, they safely return to the earth as compost.",
             steps: [
-            { text: "Get two empty, clean coconut shells.", img: genImg("two half cut coconut shells facing down"), ask: "Got your natural shoes? 🥥" },
-            { text: "Ask an adult to poke holes and tie ropes.", img: genImg("thick rope threaded through a hole in a coconut shell"), ask: "Ropes tied tight? 🧵" },
-            { text: "Hold the ropes, stand on the shells, and walk tall!", img: genImg("child walking on coconut shells holding the ropes like stilts"), ask: "Walking like a giant? 🎪" }
+            { text: "Get two empty, clean coconut shells.", emoji: "🥥", ask: "Got your natural shoes?", motivation: "Time to get tall!" },
+            { text: "Ask an adult to poke holes and tie ropes.", emoji: "🧵", ask: "Ropes tied tight?", motivation: "Safety first! Great job." },
+            { text: "Hold the ropes, stand on the shells, and walk tall!", emoji: "🎪", ask: "Walking like a giant?", motivation: "You're walking on top of the world!" }
         ]},
 
         // --- ORIGAMI TOYS ---
@@ -385,33 +380,33 @@
             title: "Paper Boat ⛵", 
             benefit: "Recycling old paper stops villages from burning waste, keeping our air clean!",
             steps: [
-            { text: "Fold paper in half, then fold corners to middle.", img: genImg("paper folded into a triangle roof house shape"), ask: "Looks like a house roof? 🏠" },
-            { text: "Fold bottom flaps up to make a hat.", img: genImg("origami paper folded into a sailor hat"), ask: "Got your hat? 🎩" },
-            { text: "Open hat, squash to square, pull sides to pop the boat!", img: genImg("opening an origami paper boat"), ask: "Is it ready to sail? ⛵" }
+            { text: "Fold paper in half, then fold corners to middle.", emoji: "🏠", ask: "Looks like a house roof?", motivation: "Aye aye, captain! Great start." },
+            { text: "Fold bottom flaps up to make a hat.", emoji: "🎩", ask: "Got your hat?", motivation: "Looking sharp!" },
+            { text: "Open hat, squash to square, pull sides to pop the boat!", emoji: "⛵", ask: "Is it ready to sail?", motivation: "Smooth sailing! You did it!" }
         ]},
         'plane': { 
             title: "Paper Plane ✈️", 
             benefit: "Using recycled materials means less trash in our fields and rivers.",
             steps: [
-            { text: "Fold paper longways, open, fold top corners in.", img: genImg("paper with top corners folded in to a point"), ask: "Is it pointy? 📐" },
-            { text: "Fold it in half again, then fold the wings down.", img: genImg("folding the wings down on a paper airplane"), ask: "Wings ready? 🦅" },
-            { text: "Hold the bottom and throw it gently!", img: genImg("paper airplane flying through the air"), ask: "Did it fly far? ☁️" }
+            { text: "Fold paper longways, open, fold top corners in.", emoji: "📐", ask: "Is it pointy?", motivation: "Ready for takeoff preparations!" },
+            { text: "Fold it in half again, then fold the wings down.", emoji: "🦅", ask: "Wings ready?", motivation: "Those wings look fast!" },
+            { text: "Hold the bottom and throw it gently!", emoji: "☁️", ask: "Did it fly far?", motivation: "Whoosh! Incredible flight!" }
         ]},
         'frog': { 
             title: "Jumping Frog 🐸", 
             benefit: "A fun way to reuse paper instead of throwing it into landfills where it gets mixed with toxic plastics.",
             steps: [
-            { text: "Fold paper into a triangle and fold legs on sides.", img: genImg("origami paper frog with legs folded out"), ask: "Got legs? 🐸" },
-            { text: "Fold a zigzag spring at the back end.", img: genImg("z-fold at the back of an origami frog to make a spring"), ask: "Is the spring bouncy? 🦘" },
-            { text: "Push down on his back and watch him hop!", img: genImg("finger pushing down on a paper frog to make it jump"), ask: "Did he jump high? ⬆️" }
+            { text: "Fold paper into a triangle and fold legs on sides.", emoji: "🐸", ask: "Got legs?", motivation: "Ribbit! Looking good." },
+            { text: "Fold a zigzag spring at the back end.", emoji: "🦘", ask: "Is the spring bouncy?", motivation: "Get ready to jump!" },
+            { text: "Push down on his back and watch him hop!", emoji: "⬆️", ask: "Did he jump high?", motivation: "What a leap! Fantastic!" }
         ]},
         'flower': { 
             title: "Magic Flower 🌸", 
             benefit: "Paper art is 100% biodegradable. It's beautiful to make and kind to the Earth!",
             steps: [
-            { text: "Start with a colorful square paper.", img: genImg("a bright pink square piece of paper"), ask: "Got your favorite color? 🎨" },
-            { text: "Fold all four corners into the middle dot.", img: genImg("four corners of paper folded into the center like an envelope"), ask: "Looks like an envelope? ✉️" },
-            { text: "Pinch the bottom gently to puff out the petals!", img: genImg("paper blooming into a beautiful 3d flower"), ask: "Did it bloom? 🌸" }
+            { text: "Start with a colorful square paper.", emoji: "🎨", ask: "Got your favorite color?", motivation: "Time to plant a paper garden!" },
+            { text: "Fold all four corners into the middle dot.", emoji: "✉️", ask: "Looks like an envelope?", motivation: "Folding perfectly!" },
+            { text: "Pinch the bottom gently to puff out the petals!", emoji: "🌸", ask: "Did it bloom?", motivation: "Beautiful! You made nature art." }
         ]}
     };
 
@@ -444,13 +439,9 @@
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
         document.getElementById("step-ask").innerText = s.ask;
         
-        // Load the AI Generated Image smoothly
-        const imgElement = document.getElementById("step-img-display");
-        imgElement.style.opacity = '0'; 
-        imgElement.src = s.img;
-        imgElement.onload = function() {
-            imgElement.style.opacity = '1'; 
-        };
+        // Inject Emoji and Motivational Text
+        document.getElementById("step-emoji").innerText = s.emoji;
+        document.getElementById("step-motivation").innerText = s.motivation;
 
         document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "🎉 Finish Quest!" : "I did it! Next →";
     }
