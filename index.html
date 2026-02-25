@@ -82,19 +82,19 @@
             transition: transform 0.1s;
         }
         .card:active { transform: translateY(6px); box-shadow: 0 0px 0px transparent; }
-        .card.selected-nature { border: 4px solid var(--primary); background-color: #FFF3E0; }
-        .card.selected-paper { border: 4px solid var(--paper-blue); background-color: #E0F7FA; }
+        .card.selected-nature { border: 4px solid var(--primary); background-color: #FFF3E0; box-shadow: 0 6px 0px var(--primary); }
+        .card.selected-paper { border: 4px solid var(--paper-blue); background-color: #E0F7FA; box-shadow: 0 6px 0px var(--paper-blue); }
         .card-emoji { font-size: 50px; }
 
         .btn-main {
             display: block;
-            width: 80%;
+            width: 85%;
             margin: 25px auto;
             background-color: var(--accent);
             border: 4px solid #FBC02D;
-            padding: 18px;
+            padding: 20px;
             border-radius: 40px;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 6px 0px #FBC02D;
@@ -120,8 +120,8 @@
         }
         .step-img-tag { background: #eee; color: #777; padding: 10px; font-size: 14px; border-radius: 10px; margin-bottom: 15px; font-style: italic; }
         .step-nav { display: flex; justify-content: space-between; gap: 10px; }
-        .btn-step { flex: 1; padding: 12px; border-radius: 20px; border: none; font-family: inherit; font-weight: bold; cursor: pointer; }
-        .btn-next { background: var(--green); color: white; }
+        .btn-step { flex: 1; padding: 15px; border-radius: 25px; border: none; font-family: inherit; font-weight: bold; cursor: pointer; }
+        .btn-next { background: var(--green); color: white; box-shadow: 0 4px 0px #2E7D32; }
 
         /* Universal AI Chatbox */
         .chat-container {
@@ -191,7 +191,7 @@
             </div>
             <div class="step-nav">
                 <button class="btn-step" style="background:#ddd" onclick="prevStep()">Back</button>
-                <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">I did it! Next →</button>
+                <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">Done! Next →</button>
             </div>
         </div>
 
@@ -218,7 +218,11 @@
 </div>
 
 <script>
-    let currentStep = 0; let selectedItem = ""; let selectedCategory = ""; let userScore = 0; let activeSteps = [];
+    let currentStep = 0; 
+    let selectedItem = ""; 
+    let selectedCategory = ""; 
+    let userScore = 0; 
+    let activeSteps = [];
 
     const db = {
         'leaf': { title: "Leaf Whistle", steps: [
@@ -232,9 +236,21 @@
             { text: "Zig-zag fold them to the end.", img: "[Diagram: Zig-zag folding steps]", ask: "Almost there? 🔁" },
             { text: "Pull it to snap!", img: "[Diagram: Stretching the snake]", ask: "Does it snap? 🐍" }
         ]},
+        'mango': { title: "Mango Whistle", steps: [
+            { text: "Clean a hairy mango seed.", img: "[Diagram: Clean mango seed]", ask: "Is it clean? 🥭" },
+            { text: "Rub the sides on a rock until flat.", img: "[Diagram: Rubbing seed on stone]", ask: "Is it flat? 🪨" },
+            { text: "Remove the soft part inside.", img: "[Diagram: Emptying the seed]", ask: "Is it hollow? 🤏" },
+            { text: "Blow over the top to whistle!", img: "[Diagram: Blowing over seed]", ask: "Hear the whistle? 🎶" }
+        ]},
+        'shell': { title: "Nut Shoes", steps: [
+            { text: "Get two coconut shells.", img: "[Diagram: Two coconut shells]", ask: "Got them? 🥥" },
+            { text: "Poke a hole in the top center.", img: "[Diagram: Poking holes]", ask: "Be careful! Holes done? 🕳️" },
+            { text: "Thread a rope through the holes.", img: "[Diagram: Threading rope]", ask: "Rope is in? 🧵" },
+            { text: "Stand on them and walk!", img: "[Diagram: Walking on shells]", ask: "Are you walking? 🎪" }
+        ]},
         'frog': { title: "Jumping Frog", steps: [
             { text: "Fold paper into a triangle.", img: "[Diagram: Triangle fold]", ask: "Done? 🔺" },
-            { text: "Fold legs out.", img: "[Diagram: Leg folding]", ask: "Got legs? 🐸" },
+            { text: "Fold legs out on the sides.", img: "[Diagram: Leg folding]", ask: "Got legs? 🐸" },
             { text: "Fold a spring at the back.", img: "[Diagram: Spring fold]", ask: "Ready to jump? 🦘" }
         ]},
         'boat': { title: "Paper Boat", steps: [
@@ -245,18 +261,37 @@
     };
 
     function selectItem(item, cat, el) {
-        selectedItem = item; selectedCategory = cat;
+        selectedItem = item; 
+        selectedCategory = cat;
+        // Reset all selections
         document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
+        // Highlight the correct one
         el.classList.add(cat === 'nature' ? 'selected-nature' : 'selected-paper');
     }
 
     function startBuilding(cat) {
-        if (!selectedItem || selectedCategory !== cat) { alert("Pick a toy first! ✨"); return; }
-        activeSteps = db[selectedItem].steps; currentStep = 0;
+        if (!selectedItem) { 
+            alert("Oops! Tap on a toy picture first! ✨"); 
+            return; 
+        }
+        if (selectedCategory !== cat) {
+            alert("Pick a toy from the section you clicked! 🔍");
+            return;
+        }
+        
+        activeSteps = db[selectedItem].steps; 
+        currentStep = 0;
         document.getElementById("toy-title").innerText = db[selectedItem].title;
         showStep();
         document.getElementById("result-section").style.display = "block";
-        window.scrollBy({ top: 400, behavior: 'smooth' });
+        
+        // Scroll down to show instructions
+        setTimeout(() => {
+            window.scrollTo({
+                top: document.getElementById("result-section").offsetTop - 20,
+                behavior: 'smooth'
+            });
+        }, 100);
     }
 
     function showStep() {
@@ -264,19 +299,39 @@
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
         document.getElementById("step-img").innerText = s.img;
         document.getElementById("step-ask").innerText = s.ask;
-        document.getElementById("nextBtn").innerText = currentStep === activeSteps.length - 1 ? "Finish Quest! ✨" : "Done! Next →";
+        document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "Finish Quest! ✨" : "Done! Next →";
     }
 
     function nextStep() {
-        if (currentStep < activeSteps.length - 1) { currentStep++; showStep(); } 
-        else { userScore += 50; document.getElementById("scoreDisplay").innerText = "⭐ " + userScore; alert("50 Stars Earned! ⭐"); document.getElementById("result-section").style.display = "none"; }
+        if (currentStep < activeSteps.length - 1) { 
+            currentStep++; 
+            showStep(); 
+        } 
+        else { 
+            userScore += 50; 
+            document.getElementById("scoreDisplay").innerText = "⭐ " + userScore; 
+            alert("50 Stars Earned! You are a Nature Master! ⭐"); 
+            document.getElementById("result-section").style.display = "none";
+            selectedItem = ""; // Reset selection
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
+        }
     }
 
-    function prevStep() { if (currentStep > 0) { currentStep--; showStep(); } }
+    function prevStep() { 
+        if (currentStep > 0) { 
+            currentStep--; 
+            showStep(); 
+        } 
+    }
 
-    function submitIdea() { alert("Idea sent! You're a true inventor! 🌟"); }
+    function submitIdea() { 
+        alert("Idea sent! You're a true inventor! 🌟"); 
+        document.getElementById("cName").value = "";
+        document.getElementById("cToy").value = "";
+        document.getElementById("cIdea").value = "";
+    }
 
-    // UNIVERSAL AI CHATBOT LOGIC
+    // CHATBOT LOGIC
     function handleKey(e) { if(e.key === 'Enter') sendMsg(); }
     function sendMsg() {
         let input = document.getElementById("chatInput");
@@ -302,12 +357,12 @@
     }
 
     function getBotReply(t) {
-        if(t.includes("prime minister")) return "The Prime Minister of India is Shri Narendra Modi. He leads the country from New Delhi! 🇮🇳";
-        if(t.includes("rhyme")) return "Okay! Here's one: 'Nature is green, the sky is blue, I love the Earth, and so should you!' 🌳✨";
-        if(t.includes("joke")) return "Why did the tree go to the dentist? To get a root canal! 😂";
-        if(t.includes("hello") || t.includes("hi")) return "Hello friend! Ask me anything about India, nature, or rhymes!";
-        return "That's interesting! I'm still learning, but you can ask me about the PM, rhymes, or how to build toys! 🤔";
+        if(t.includes("prime minister")) return "The Prime Minister of India is Shri Narendra Modi! 🇮🇳";
+        if(t.includes("rhyme")) return "Nature is green, the sky is blue, I love the Earth, and so should you! 🌳✨";
+        if(t.includes("joke")) return "What did the tree wear to the pool party? Swimming trunks! 😂";
+        if(t.includes("hello") || t.includes("hi")) return "Hello! I'm EcoBot. Ask me anything!";
+        return "That's cool! Ask me about rhymes, the PM, or how to build a toy! 🤔";
     }
 </script>
 </body>
-</html>
+</html> 
