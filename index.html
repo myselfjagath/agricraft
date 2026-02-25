@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoPlay | Your Nature Quest!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <title>AgriToy-Tech | Nature Quest!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #87CEEB; 
+            --bg-color: #E0F7FA; 
             --card-bg: #FFFFFF;
             --primary: #FF9800; 
             --text-dark: #333333;
             --accent: #FFEB3B; 
             --green: #4CAF50;
-            --chat-bg: #E3F2FD;
+            --chat-bg: #F1F8E9;
             --paper-blue: #00BCD4;
         }
         body {
@@ -27,9 +27,9 @@
         .app-container {
             width: 100%;
             max-width: 420px;
-            background-color: #F0F8FF; 
+            background-color: #FAFAFA; 
             min-height: 100vh;
-            box-shadow: 0 0 25px rgba(0,0,0,0.2);
+            box-shadow: 0 0 25px rgba(0,0,0,0.15);
             border-radius: 0 0 30px 30px;
             padding-bottom: 40px;
             position: relative;
@@ -42,29 +42,49 @@
             color: var(--primary);
             padding: 8px 15px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 18px;
-            box-shadow: 0 4px 0px #E0E0E0;
+            box-shadow: 0 4px 0px #FFC107;
             z-index: 10;
         }
+        
+        /* Vibrant Playful Header */
         .header {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, #4CAF50, #009688);
             color: white;
-            padding: 45px 20px 30px;
+            padding: 50px 20px 35px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
+            box-shadow: 0 6px 15px rgba(0,150,136,0.3);
         }
-        .header h1 { margin: 0; font-size: 38px; text-shadow: 2px 2px 0px rgba(0,0,0,0.2); }
+        .header h1 { 
+            margin: 0; 
+            font-size: 42px; 
+            font-weight: 700;
+            color: #FFF;
+            /* Fun 3D Bouncy Text Effect */
+            text-shadow: 3px 3px 0px #FF9800, 6px 6px 0px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin: 15px 0 0 0;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
         
         .quest-title {
             font-size: 24px;
             text-align: center;
-            margin: 30px 20px 15px;
+            margin: 35px 20px 15px;
             color: #2c3e50;
-            font-weight: 600;
+            font-weight: 700;
         }
-        .quest-title span { display: block; font-size: 16px; color: #555; margin-top: 5px; }
+        .quest-title span { display: block; font-size: 16px; color: #666; margin-top: 5px; font-weight: 400;}
 
         .grid {
             display: grid;
@@ -79,27 +99,30 @@
             text-align: center;
             cursor: pointer;
             box-shadow: 0 6px 0px #D3D3D3;
-            transition: transform 0.1s;
+            transition: transform 0.1s, box-shadow 0.1s;
         }
         .card:active { transform: translateY(6px); box-shadow: 0 0px 0px transparent; }
-        .card.selected-nature { border: 4px solid var(--primary); background-color: #FFF3E0; box-shadow: 0 6px 0px var(--primary); }
+        .card.selected-nature { border: 4px solid var(--primary); background-color: #FFF8E1; box-shadow: 0 6px 0px var(--primary); }
         .card.selected-paper { border: 4px solid var(--paper-blue); background-color: #E0F7FA; box-shadow: 0 6px 0px var(--paper-blue); }
-        .card-emoji { font-size: 50px; }
+        .card-emoji { font-size: 55px; margin-bottom: 5px; }
+        .card-title { font-weight: 700; color: #444; }
 
         .btn-main {
             display: block;
             width: 85%;
             margin: 25px auto;
             background-color: var(--accent);
+            color: #333;
             border: 4px solid #FBC02D;
-            padding: 20px;
+            padding: 18px;
             border-radius: 40px;
             font-size: 24px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             box-shadow: 0 6px 0px #FBC02D;
             font-family: inherit;
         }
+        .btn-main:active { transform: translateY(6px); box-shadow: 0 0px 0px transparent; }
 
         /* Interactive Step Section */
         #result-section {
@@ -110,18 +133,30 @@
             border-radius: 25px;
             border: 4px solid var(--green);
             text-align: center;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.2);
         }
+        .eco-badge { background: var(--green); color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; display: inline-block; }
         .step-box {
-            background: #fdfdfd;
-            border: 2px dashed #ddd;
+            background: #FAFAFA;
+            border: 3px dashed #BDBDBD;
             padding: 20px;
             border-radius: 20px;
             margin: 15px 0;
         }
-        .step-img-tag { background: #eee; color: #777; padding: 10px; font-size: 14px; border-radius: 10px; margin-bottom: 15px; font-style: italic; }
+        .step-img-tag { 
+            background: #E3F2FD; 
+            color: #1565C0; 
+            padding: 15px; 
+            font-size: 15px; 
+            font-weight: 600;
+            border-radius: 15px; 
+            margin-bottom: 15px; 
+        }
         .step-nav { display: flex; justify-content: space-between; gap: 10px; }
-        .btn-step { flex: 1; padding: 15px; border-radius: 25px; border: none; font-family: inherit; font-weight: bold; cursor: pointer; }
-        .btn-next { background: var(--green); color: white; box-shadow: 0 4px 0px #2E7D32; }
+        .btn-step { flex: 1; padding: 15px; border-radius: 25px; border: none; font-family: inherit; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn-prev { background: #E0E0E0; color: #555; box-shadow: 0 4px 0px #BDBDBD; }
+        .btn-next { background: var(--primary); color: white; box-shadow: 0 4px 0px #F57C00; }
+        .btn-step:active { transform: translateY(4px); box-shadow: 0 0px 0px transparent; }
 
         /* Universal AI Chatbox */
         .chat-container {
@@ -132,14 +167,14 @@
             overflow: hidden;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
-        .chat-header { background: var(--paper-blue); color: white; padding: 15px; text-align: center; margin: 0; }
+        .chat-header { background: var(--paper-blue); color: white; padding: 15px; text-align: center; margin: 0; font-size: 20px; }
         .chat-window { height: 220px; background: var(--chat-bg); padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; font-size: 15px; }
-        .bot-msg { background: white; align-self: flex-start; border-bottom-left-radius: 5px; }
-        .user-msg { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
-        .chat-input-area { display: flex; padding: 10px; background: white; border-top: 1px solid #eee; }
-        .chat-input { flex: 1; border: 2px solid #ddd; border-radius: 20px; padding: 8px 15px; font-family: inherit; }
-        .chat-send { background: var(--paper-blue); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; margin-left: 8px; cursor: pointer; }
+        .chat-msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; font-size: 16px; font-weight: 600;}
+        .bot-msg { background: white; align-self: flex-start; border-bottom-left-radius: 5px; border: 2px solid #E0E0E0;}
+        .user-msg { background: var(--paper-blue); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
+        .chat-input-area { display: flex; padding: 10px; background: white; border-top: 2px solid #eee; }
+        .chat-input { flex: 1; border: 2px solid #ddd; border-radius: 20px; padding: 10px 15px; font-family: inherit; font-size: 16px;}
+        .chat-send { background: var(--paper-blue); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; margin-left: 8px; cursor: pointer; font-size: 18px;}
 
         /* Contribution Box */
         .contrib-box {
@@ -147,10 +182,10 @@
             background: #FFF9C4;
             padding: 25px;
             border-radius: 25px;
-            border: 3px dashed var(--primary);
+            border: 4px dashed var(--primary);
             text-align: center;
         }
-        .input-field { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #FFE082; border-radius: 12px; font-family: inherit; box-sizing: border-box; }
+        .input-field { width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #FFE082; border-radius: 15px; font-family: inherit; font-size: 16px; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -159,60 +194,64 @@
     <div class="score-badge" id="scoreDisplay">⭐ 0</div>
 
     <div class="header">
-        <h1>✨ EcoPlay ✨</h1>
-        <p>Your Nature Adventure!</p>
+        <h1>🌱 AgriToy-Tech 🌱</h1>
+        <p>Save the Earth while you play!</p>
     </div>
 
     <div class="content">
-        <h2 class="quest-title">Look around you! 🌲<span>What can you find on the ground?</span></h2>
+        <h2 class="quest-title">Look around you! 🌴<span>What nature treasures can you find?</span></h2>
         
         <div class="grid">
-            <div class="card" onclick="selectItem('leaf', 'nature', this)"><div class="card-emoji">🌿</div><div>Leaf Whistle</div></div>
-            <div class="card" onclick="selectItem('snake', 'nature', this)"><div class="card-emoji">🐍</div><div>Ola Snake</div></div>
-            <div class="card" onclick="selectItem('mango', 'nature', this)"><div class="card-emoji">🥭</div><div>Mango Seed</div></div>
-            <div class="card" onclick="selectItem('shell', 'nature', this)"><div class="card-emoji">🥥</div><div>Nut Shoes</div></div>
+            <div class="card" onclick="selectItem('rocket', 'nature', this)"><div class="card-emoji">🚀</div><div class="card-title">Ola Rocket</div></div>
+            <div class="card" onclick="selectItem('glasses', 'nature', this)"><div class="card-emoji">😎</div><div class="card-title">Ola Shades</div></div>
+            <div class="card" onclick="selectItem('snake', 'nature', this)"><div class="card-emoji">🐍</div><div class="card-title">Ola Snake</div></div>
+            <div class="card" onclick="selectItem('leaf', 'nature', this)"><div class="card-emoji">🌿</div><div class="card-title">Leaf Whistle</div></div>
+            <div class="card" onclick="selectItem('mango', 'nature', this)"><div class="card-emoji">🥭</div><div class="card-title">Mango Toot</div></div>
+            <div class="card" onclick="selectItem('shell', 'nature', this)"><div class="card-emoji">🥥</div><div class="card-title">Nut Shoes</div></div>
         </div>
-        <button class="btn-main" onclick="startBuilding('nature')">Let's Build! 🚀</button>
+        <button class="btn-main" onclick="startBuilding('nature')">Let's Build! 🛠️</button>
 
-        <h2 class="quest-title">Got some old paper? 📄<span>Let's recycle it!</span></h2>
+        <h2 class="quest-title">Got some old paper? 📄<span>Let's recycle it into fun!</span></h2>
         <div class="grid">
-            <div class="card" onclick="selectItem('boat', 'paper', this)"><div class="card-emoji">⛵</div><div>Paper Boat</div></div>
-            <div class="card" onclick="selectItem('frog', 'paper', this)"><div class="card-emoji">🐸</div><div>Jumping Frog</div></div>
+            <div class="card" onclick="selectItem('boat', 'paper', this)"><div class="card-emoji">⛵</div><div class="card-title">Paper Boat</div></div>
+            <div class="card" onclick="selectItem('plane', 'paper', this)"><div class="card-emoji">✈️</div><div class="card-title">Paper Plane</div></div>
+            <div class="card" onclick="selectItem('frog', 'paper', this)"><div class="card-emoji">🐸</div><div class="card-title">Jumping Frog</div></div>
+            <div class="card" onclick="selectItem('flower', 'paper', this)"><div class="card-emoji">🌸</div><div class="card-title">Magic Flower</div></div>
         </div>
-        <button class="btn-main" style="background:#00BCD4; border-color:#0097A7; color:white;" onclick="startBuilding('paper')">Let's Fold! ✂️</button>
+        <button class="btn-main" style="background:#00BCD4; border-color:#00838F; color:white;" onclick="startBuilding('paper')">Let's Fold! ✂️</button>
 
         <div id="result-section">
             <div class="eco-badge">🌍 Planet Hero Quest!</div>
-            <h2 id="toy-title" style="margin-top:10px">Toy Name</h2>
+            <h2 id="toy-title" style="margin-top:15px; font-size: 28px; color: #2E7D32;">Toy Name</h2>
             <div class="step-box">
                 <div id="step-img" class="step-img-tag"></div>
-                <div id="step-text" style="font-size:20px; margin-bottom:10px">Step 1</div>
-                <p id="step-ask" style="color:var(--green); font-weight:bold;"></p>
+                <div id="step-text" style="font-size:22px; font-weight: 700; color:#333; margin-bottom:10px">Step 1</div>
+                <p id="step-ask" style="color:var(--primary); font-size: 18px; font-weight:bold;"></p>
             </div>
             <div class="step-nav">
-                <button class="btn-step" style="background:#ddd" onclick="prevStep()">Back</button>
-                <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">Done! Next →</button>
+                <button class="btn-step btn-prev" onclick="prevStep()">← Back</button>
+                <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">I did it! Next →</button>
             </div>
         </div>
 
         <div class="chat-container">
             <h3 class="chat-header">🤖 Ask EcoBot Anything!</h3>
             <div class="chat-window" id="chatWindow">
-                <div class="chat-msg bot-msg">Hi! I'm EcoBot. I can tell rhymes, answer questions, or help with your toys!</div>
+                <div class="chat-msg bot-msg">Hi! I'm EcoBot. I know about nature, rhymes, and politics! Ask me anything! 🌻</div>
             </div>
             <div class="chat-input-area">
-                <input type="text" id="chatInput" class="chat-input" placeholder="Ask me something..." onkeypress="handleKey(event)">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Type your question..." onkeypress="handleKey(event)">
                 <button class="chat-send" onclick="sendMsg()">▶</button>
             </div>
         </div>
 
         <div class="contrib-box">
-            <h3>💡 Invented a Toy?</h3>
-            <p>Tell us so other kids can build it!</p>
-            <input type="text" id="cName" class="input-field" placeholder="Your Name">
-            <input type="text" id="cToy" class="input-field" placeholder="Toy Name">
-            <textarea id="cIdea" class="input-field" placeholder="How do you make it?" style="height:80px;"></textarea>
-            <button class="btn-main" style="width:100%; margin:10px 0 0 0;" onclick="submitIdea()">Submit Idea 💌</button>
+            <h3 style="font-size: 22px; margin-top:0;">💡 Invented a new toy?</h3>
+            <p style="font-weight: 600; color:#555;">Tell us so other kids can build it!</p>
+            <input type="text" id="cName" class="input-field" placeholder="What is your name?">
+            <input type="text" id="cToy" class="input-field" placeholder="Name of your awesome toy?">
+            <textarea id="cIdea" class="input-field" placeholder="How do you make it?" style="height:90px;"></textarea>
+            <button class="btn-main" style="width:100%; margin:10px 0 0 0;" onclick="submitIdea()">Send Idea 💌</button>
         </div>
     </div>
 </div>
@@ -225,38 +264,70 @@
     let activeSteps = [];
 
     const db = {
-        'leaf': { title: "Leaf Whistle", steps: [
+        // --- NEW NATURE TOYS ---
+        'rocket': { title: "Ola Rocket 🚀", steps: [
+            { text: "Find one long, green coconut leaf.", img: "[Diagram: A single, long green coconut leaf held by a child]", ask: "Got your super fuel leaf? 🌴" },
+            { text: "Carefully tear a small strip from the bottom end.", img: "[Diagram: Hands tearing a small 2-inch strip from the base of the leaf]", ask: "Is it torn just a little bit? 🤏" },
+            { text: "Wrap the torn part around your pointer finger like a ring!", img: "[Diagram: The leaf wedge hooked securely around a child's index finger]", ask: "Is it resting on your finger? ☝️" },
+            { text: "Pull the long part back tight, and let it go to launch!", img: "[Diagram: Child pulling the leaf back like a slingshot and it flying into the sky]", ask: "Did it reach the stars? 🌟" }
+        ]},
+        'glasses': { title: "Ola Shades 😎", steps: [
+            { text: "Grab a nice, long green coconut leaf!", img: "[Diagram: A single green coconut leaf]", ask: "Got your leaf ready? 🌿" },
+            { text: "Loop the leaf to make two round circles for your eyes.", img: "[Diagram: Bending the leaf into two circles side-by-side like binoculars]", ask: "Do you have two eye holes? 👀" },
+            { text: "Use the tiny leaf stick to pin the circles together so they stay.", img: "[Diagram: A tiny coconut stick acting like a pin holding the circles]", ask: "Are they pinned tight? 📌" },
+            { text: "Fold two straight pieces back for the arms and try them on!", img: "[Diagram: A cool kid wearing the leaf sunglasses smiling]", ask: "Looking super cool? 😎" }
+        ]},
+        
+        // --- EXISTING NATURE TOYS ---
+        'snake': { title: "Ola Snake 🐍", steps: [
+            { text: "Take two long green leaf strips.", img: "[Diagram: Two long coconut leaf strips lying flat]", ask: "Got the strips? 🌿" },
+            { text: "Cross them at the bottom like the letter 'L'.", img: "[Diagram: Strips crossed at a 90-degree angle]", ask: "Are they crossed? 📐" },
+            { text: "Fold the bottom strip over the top one. Keep zigzagging!", img: "[Diagram: Hands folding one leaf over the other in a square pattern]", ask: "Is it getting thicker? 🔁" },
+            { text: "Hold the tail and pull the head—watch it snap!", img: "[Diagram: The zigzag leaf stretching out like a springy snake]", ask: "Did it bite? 🐍" }
+        ]},
+        'leaf': { title: "Leaf Whistle 🎵", steps: [
             { text: "Find a fresh green leaf.", img: "[Diagram: A single green leaf]", ask: "Got your leaf? 🌿" },
-            { text: "Roll it tightly like a tube.", img: "[Diagram: Rolling leaf into a tube]", ask: "Is it a tight roll? 🍦" },
-            { text: "Blow into the end!", img: "[Diagram: Child blowing whistle]", ask: "Did it toot? 🎶" }
+            { text: "Roll it tightly into a cone shape.", img: "[Diagram: Rolling the leaf into a tiny ice cream cone]", ask: "Is it a tight roll? 🍦" },
+            { text: "Blow hard into the tiny end!", img: "[Diagram: Child blowing into the pointed end of the whistle]", ask: "Did it toot? 🎶" }
         ]},
-        'snake': { title: "Ola Snake", steps: [
-            { text: "Take two long leaf strips.", img: "[Diagram: Two long leaf strips]", ask: "Got the strips? 🌿" },
-            { text: "Cross them like an 'L'.", img: "[Diagram: Strips crossed at 90 deg]", ask: "Are they crossed? 📐" },
-            { text: "Zig-zag fold them to the end.", img: "[Diagram: Zig-zag folding steps]", ask: "Almost there? 🔁" },
-            { text: "Pull it to snap!", img: "[Diagram: Stretching the snake]", ask: "Does it snap? 🐍" }
+        'mango': { title: "Mango Toot 🥭", steps: [
+            { text: "Eat a sweet mango and clean the hairy seed.", img: "[Diagram: A clean mango seed]", ask: "Is it super clean? 🥭" },
+            { text: "Rub the sides flat on a rough stone.", img: "[Diagram: Child rubbing the seed on a flat rock]", ask: "Is it flat enough to open? 🪨" },
+            { text: "Carefully scrape out the soft part inside.", img: "[Diagram: Scraping the inside of the seed to make it hollow]", ask: "Is it empty inside? 🤏" },
+            { text: "Blow across the top like a bottle to make music!", img: "[Diagram: Blowing across the opening of the seed]", ask: "Hear the loud whistle? 🎶" }
         ]},
-        'mango': { title: "Mango Whistle", steps: [
-            { text: "Clean a hairy mango seed.", img: "[Diagram: Clean mango seed]", ask: "Is it clean? 🥭" },
-            { text: "Rub the sides on a rock until flat.", img: "[Diagram: Rubbing seed on stone]", ask: "Is it flat? 🪨" },
-            { text: "Remove the soft part inside.", img: "[Diagram: Emptying the seed]", ask: "Is it hollow? 🤏" },
-            { text: "Blow over the top to whistle!", img: "[Diagram: Blowing over seed]", ask: "Hear the whistle? 🎶" }
+        'shell': { title: "Nut Shoes 🥥", steps: [
+            { text: "Get two empty, clean coconut shells.", img: "[Diagram: Two half-cut coconut shells facing down]", ask: "Got your natural shoes? 🥥" },
+            { text: "Ask an adult to poke a small hole in the top center.", img: "[Diagram: A hole being drilled in the top of the shell]", ask: "Holes all done? 🕳️" },
+            { text: "Put a strong rope through and tie a big knot inside.", img: "[Diagram: Threading thick rope through the hole and knotting it]", ask: "Is the knot tight? 🧵" },
+            { text: "Hold the ropes, stand on the shells, and walk tall!", img: "[Diagram: A child walking on the coconut shells holding the ropes]", ask: "Are you walking like a giant? 🎪" }
         ]},
-        'shell': { title: "Nut Shoes", steps: [
-            { text: "Get two coconut shells.", img: "[Diagram: Two coconut shells]", ask: "Got them? 🥥" },
-            { text: "Poke a hole in the top center.", img: "[Diagram: Poking holes]", ask: "Be careful! Holes done? 🕳️" },
-            { text: "Thread a rope through the holes.", img: "[Diagram: Threading rope]", ask: "Rope is in? 🧵" },
-            { text: "Stand on them and walk!", img: "[Diagram: Walking on shells]", ask: "Are you walking? 🎪" }
+
+        // --- ORIGAMI TOYS ---
+        'boat': { title: "Paper Boat ⛵", steps: [
+            { text: "Fold a rectangle paper in half top-to-bottom.", img: "[Diagram: Paper folded in half hamburger style]", ask: "Is it folded? 📄" },
+            { text: "Fold the top corners into the middle to make a roof.", img: "[Diagram: Corners folded down to look like a triangle roof house]", ask: "Looks like a house? 🏠" },
+            { text: "Fold the bottom flaps up like a sailor hat.", img: "[Diagram: Bottom edges folded up over the triangle]", ask: "Got your hat? 🎩" },
+            { text: "Open the hat, squash it into a square, and pull the sides out!", img: "[Diagram: Pulling the edges apart to pop the boat open]", ask: "Is it ready to sail? ⛵" }
         ]},
-        'frog': { title: "Jumping Frog", steps: [
-            { text: "Fold paper into a triangle.", img: "[Diagram: Triangle fold]", ask: "Done? 🔺" },
-            { text: "Fold legs out on the sides.", img: "[Diagram: Leg folding]", ask: "Got legs? 🐸" },
-            { text: "Fold a spring at the back.", img: "[Diagram: Spring fold]", ask: "Ready to jump? 🦘" }
+        'plane': { title: "Paper Plane ✈️", steps: [
+            { text: "Fold a paper in half longways, then open it.", img: "[Diagram: Paper with a crease down the middle]", ask: "Got the line in the middle? 📏" },
+            { text: "Fold the top two corners into the middle line.", img: "[Diagram: Top corners folded to make a pointy top]", ask: "Is it pointy? 📐" },
+            { text: "Fold it in half, then fold the wings down on both sides.", img: "[Diagram: Folding the paper in half and peeling wings back]", ask: "Wings ready? 🦅" },
+            { text: "Hold the bottom and throw it gently!", img: "[Diagram: Plane flying through the air with action lines]", ask: "Did it fly far? ☁️" }
         ]},
-        'boat': { title: "Paper Boat", steps: [
-            { text: "Fold paper in half.", img: "[Diagram: Half fold]", ask: "Done? 📄" },
-            { text: "Fold corners to center.", img: "[Diagram: Triangle roof fold]", ask: "Looks like a house? 🏠" },
-            { text: "Pop the boat open!", img: "[Diagram: Opening the boat]", ask: "Is it floating? ⛵" }
+        'frog': { title: "Jumping Frog 🐸", steps: [
+            { text: "Start with a square piece of paper and fold a triangle at the top.", img: "[Diagram: Square paper with a triangle folded at the top edge]", ask: "Got your triangle? 🔺" },
+            { text: "Fold the sides into the middle.", img: "[Diagram: Sides folded inward to make a narrow body]", ask: "Is the body skinny? 📏" },
+            { text: "Fold the bottom up, and fold it back down to make a bouncy spring.", img: "[Diagram: Z-fold at the bottom of the frog to act as a spring]", ask: "Is the spring ready? 🦘" },
+            { text: "Push down on his back and watch him hop!", img: "[Diagram: Finger pushing the frog's back and the frog jumping]", ask: "Did he jump high? 🐸" }
+        ]},
+        // --- NEW ORIGAMI TOY ---
+        'flower': { title: "Magic Flower 🌸", steps: [
+            { text: "Start with a colorful square piece of paper.", img: "[Diagram: A bright pink square piece of paper]", ask: "Got your favorite color? 🎨" },
+            { text: "Fold it in half both ways to make a plus sign (+) crease.", img: "[Diagram: Square paper showing cross creases in the middle]", ask: "See the plus sign? ➕" },
+            { text: "Fold all four corners directly into the middle dot.", img: "[Diagram: All four corners folded in to make a smaller square envelope]", ask: "Looks like an envelope? ✉️" },
+            { text: "Pinch the bottom gently and puff out the petals to make it bloom!", img: "[Diagram: Paper blooming into a 3D flower shape]", ask: "Did your flower bloom? 🌸" }
         ]}
     };
 
@@ -265,7 +336,7 @@
         selectedCategory = cat;
         // Reset all selections
         document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
-        // Highlight the correct one
+        // Highlight the correct one with bouncy effect
         el.classList.add(cat === 'nature' ? 'selected-nature' : 'selected-paper');
     }
 
@@ -285,12 +356,8 @@
         showStep();
         document.getElementById("result-section").style.display = "block";
         
-        // Scroll down to show instructions
         setTimeout(() => {
-            window.scrollTo({
-                top: document.getElementById("result-section").offsetTop - 20,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: document.getElementById("result-section").offsetTop - 20, behavior: 'smooth' });
         }, 100);
     }
 
@@ -299,7 +366,7 @@
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
         document.getElementById("step-img").innerText = s.img;
         document.getElementById("step-ask").innerText = s.ask;
-        document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "Finish Quest! ✨" : "Done! Next →";
+        document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "🎉 Finish Quest!" : "I did it! Next →";
     }
 
     function nextStep() {
@@ -310,9 +377,9 @@
         else { 
             userScore += 50; 
             document.getElementById("scoreDisplay").innerText = "⭐ " + userScore; 
-            alert("50 Stars Earned! You are a Nature Master! ⭐"); 
+            alert("Amazing job! 50 Stars Earned! You are a Planet Hero! 🌍✨"); 
             document.getElementById("result-section").style.display = "none";
-            selectedItem = ""; // Reset selection
+            selectedItem = ""; 
             document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
         }
     }
@@ -325,7 +392,7 @@
     }
 
     function submitIdea() { 
-        alert("Idea sent! You're a true inventor! 🌟"); 
+        alert("Wow! Your idea was sent! You're a true inventor! 🌟"); 
         document.getElementById("cName").value = "";
         document.getElementById("cToy").value = "";
         document.getElementById("cIdea").value = "";
@@ -353,16 +420,17 @@
             bDiv.innerText = reply;
             win.appendChild(bDiv);
             win.scrollTop = win.scrollHeight;
-        }, 800);
+        }, 600);
     }
 
     function getBotReply(t) {
         if(t.includes("prime minister")) return "The Prime Minister of India is Shri Narendra Modi! 🇮🇳";
-        if(t.includes("rhyme")) return "Nature is green, the sky is blue, I love the Earth, and so should you! 🌳✨";
+        if(t.includes("rhyme")) return "Nature is green, the sky is blue, making eco-toys is fun to do! 🌳✨";
         if(t.includes("joke")) return "What did the tree wear to the pool party? Swimming trunks! 😂";
-        if(t.includes("hello") || t.includes("hi")) return "Hello! I'm EcoBot. Ask me anything!";
-        return "That's cool! Ask me about rhymes, the PM, or how to build a toy! 🤔";
+        if(t.includes("plastic")) return "Plastic takes hundreds of years to break down. When we make toys from leaves, we keep the Earth safe and clean! 🌍";
+        if(t.includes("hello") || t.includes("hi")) return "Hello Planet Hero! What do you want to build today?";
+        return "That's a great thought! Try building the Ola Rocket, or ask me for a rhyme! 🚀";
     }
 </script>
 </body>
-</html> 
+</html>
