@@ -7,14 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #E0F7FA; 
+            /* New Vibrant Theme Palette */
+            --bg-color: #FFFDE7; /* Sunny warm background */
             --card-bg: #FFFFFF;
-            --primary: #FF9800; 
-            --text-dark: #333333;
-            --accent: #FFEB3B; 
-            --green: #4CAF50;
+            --primary: #FF6D00; /* Deep vibrant orange */
+            --secondary: #2E7D32; /* Deep jungle green */
+            --accent: #FFD600; /* Bright sunny yellow */
+            --text-dark: #212121; /* High contrast dark gray */
             --chat-bg: #F1F8E9;
-            --paper-blue: #00BCD4;
+            --paper-blue: #00B0FF; /* Bright sky blue */
         }
         body {
             font-family: 'Fredoka', sans-serif; 
@@ -29,163 +30,199 @@
             max-width: 420px;
             background-color: #FAFAFA; 
             min-height: 100vh;
-            box-shadow: 0 0 25px rgba(0,0,0,0.15);
-            border-radius: 0 0 30px 30px;
-            padding-bottom: 40px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            border-radius: 0 0 35px 35px;
+            padding-bottom: 50px;
             position: relative;
+            overflow-x: hidden;
         }
         .score-badge {
             position: absolute;
-            top: 20px;
+            top: 25px;
             right: 20px;
-            background-color: #FFF;
-            color: var(--primary);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 18px;
-            box-shadow: 0 4px 0px #FFC107;
+            background-color: var(--accent);
+            color: var(--text-dark);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 20px;
+            box-shadow: 0 5px 0px #F57F17;
             z-index: 10;
+            border: 3px solid #FFF;
         }
         
-        /* Vibrant Playful Header */
+        /* HIGH VIBRANCY HEADER */
         .header {
-            background: linear-gradient(135deg, #4CAF50, #009688);
+            background: linear-gradient(135deg, #43A047, #009688);
             color: white;
-            padding: 50px 20px 35px;
+            padding: 60px 20px 40px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 6px 15px rgba(0,150,136,0.3);
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0,150,136,0.4);
+            position: relative;
+            overflow: hidden;
         }
+        /* Decorative circles in background */
+        .header::before {
+            content: ''; position: absolute; top: -50px; left: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;
+        }
+        .header::after {
+            content: ''; position: absolute; bottom: -30px; right: -30px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;
+        }
+
         .header h1 { 
             margin: 0; 
-            font-size: 42px; 
-            font-weight: 700;
-            color: #FFF;
-            /* Fun 3D Bouncy Text Effect */
-            text-shadow: 3px 3px 0px #FF9800, 6px 6px 0px rgba(0,0,0,0.1);
-            letter-spacing: 1px;
+            font-size: 48px; 
+            font-weight: 800;
+            color: #FFD600; /* Sunny yellow text */
+            /* High Contrast Stroke & Shadow */
+            -webkit-text-stroke: 2px #1B5E20; 
+            text-shadow: 4px 4px 0px #FF6D00;
+            letter-spacing: 2px;
+            transform: rotate(-2deg); /* Playful tilt */
+            display: inline-block;
         }
         .header p {
-            margin: 15px 0 0 0;
-            font-size: 18px;
-            font-weight: 600;
-            background: rgba(255,255,255,0.2);
+            margin: 20px 0 0 0;
+            font-size: 20px;
+            font-weight: 700;
+            background: rgba(0,0,0,0.2);
+            color: #FFF;
             display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 25px;
         }
         
         .quest-title {
-            font-size: 24px;
+            font-size: 26px;
             text-align: center;
-            margin: 35px 20px 15px;
-            color: #2c3e50;
-            font-weight: 700;
+            margin: 40px 20px 20px;
+            color: var(--secondary);
+            font-weight: 800;
         }
-        .quest-title span { display: block; font-size: 16px; color: #666; margin-top: 5px; font-weight: 400;}
+        .quest-title span { display: block; font-size: 18px; color: #666; margin-top: 8px; font-weight: 600;}
 
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 0 20px;
+            gap: 18px;
+            padding: 0 25px;
         }
         .card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px 10px;
+            border-radius: 25px;
+            padding: 25px 10px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 6px 0px #D3D3D3;
+            box-shadow: 0 8px 0px #CFD8DC;
             transition: transform 0.1s, box-shadow 0.1s;
+            border: 4px solid transparent;
         }
-        .card:active { transform: translateY(6px); box-shadow: 0 0px 0px transparent; }
-        .card.selected-nature { border: 4px solid var(--primary); background-color: #FFF8E1; box-shadow: 0 6px 0px var(--primary); }
-        .card.selected-paper { border: 4px solid var(--paper-blue); background-color: #E0F7FA; box-shadow: 0 6px 0px var(--paper-blue); }
-        .card-emoji { font-size: 55px; margin-bottom: 5px; }
-        .card-title { font-weight: 700; color: #444; }
+        .card:active { transform: translateY(8px); box-shadow: 0 0px 0px transparent; }
+        .card.selected-nature { border-color: var(--secondary); background-color: #E8F5E9; box-shadow: 0 8px 0px var(--secondary); }
+        .card.selected-paper { border-color: var(--paper-blue); background-color: #E1F5FE; box-shadow: 0 8px 0px var(--paper-blue); }
+        .card-emoji { font-size: 60px; margin-bottom: 8px; filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1)); }
+        .card-title { font-weight: 700; color: #444; font-size: 18px; }
 
         .btn-main {
             display: block;
             width: 85%;
-            margin: 25px auto;
+            margin: 30px auto;
             background-color: var(--accent);
-            color: #333;
-            border: 4px solid #FBC02D;
-            padding: 18px;
+            color: var(--text-dark);
+            border: 4px solid #F9A825;
+            padding: 20px;
             border-radius: 40px;
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 6px 0px #FBC02D;
+            box-shadow: 0 8px 0px #F9A825;
             font-family: inherit;
         }
-        .btn-main:active { transform: translateY(6px); box-shadow: 0 0px 0px transparent; }
+        .btn-main:active { transform: translateY(8px); box-shadow: 0 0px 0px transparent; }
 
-        /* Interactive Step Section */
+        /* Interactive Step Section with IMAGES */
         #result-section {
             display: none;
             margin: 30px 20px;
             background: white;
             padding: 25px;
-            border-radius: 25px;
-            border: 4px solid var(--green);
+            border-radius: 30px;
+            border: 5px solid var(--secondary);
             text-align: center;
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.2);
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
         }
-        .eco-badge { background: var(--green); color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; display: inline-block; }
+        .eco-badge { background: var(--secondary); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 800; font-size: 18px; display: inline-block; box-shadow: 0 4px 0px #1B5E20;}
         .step-box {
-            background: #FAFAFA;
-            border: 3px dashed #BDBDBD;
+            background: #F1F8E9;
+            border: 4px dashed #AED581;
             padding: 20px;
+            border-radius: 25px;
+            margin: 20px 0;
+        }
+        /* Styles for the actual image container */
+        .step-img-container { 
+            width: 100%;
+            height: 200px;
+            background: #E0E0E0;
             border-radius: 20px;
-            margin: 15px 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .step-img-tag { 
-            background: #E3F2FD; 
-            color: #1565C0; 
-            padding: 15px; 
-            font-size: 15px; 
-            font-weight: 600;
-            border-radius: 15px; 
-            margin-bottom: 15px; 
+        /* CSS trick to show parts of the generated sprite image */
+        .step-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Default position shows top left (nature supplies) */
+            object-position: 0% 0%; 
         }
-        .step-nav { display: flex; justify-content: space-between; gap: 10px; }
-        .btn-step { flex: 1; padding: 15px; border-radius: 25px; border: none; font-family: inherit; font-size: 16px; font-weight: bold; cursor: pointer; }
-        .btn-prev { background: #E0E0E0; color: #555; box-shadow: 0 4px 0px #BDBDBD; }
-        .btn-next { background: var(--primary); color: white; box-shadow: 0 4px 0px #F57C00; }
-        .btn-step:active { transform: translateY(4px); box-shadow: 0 0px 0px transparent; }
+        /* Different positions for different types of steps */
+        .img-pos-nature-play { object-position: 100% 0%; } /* Top Right */
+        .img-pos-paper-supplies { object-position: 0% 100%; } /* Bottom Left */
+        .img-pos-paper-play { object-position: 100% 100%; } /* Bottom Right */
+
+        .step-nav { display: flex; justify-content: space-between; gap: 15px; }
+        .btn-step { flex: 1; padding: 15px; border-radius: 25px; border: none; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer; }
+        .btn-prev { background: #CFD8DC; color: #546E7A; box-shadow: 0 5px 0px #B0BEC5; }
+        .btn-next { background: var(--secondary); color: white; box-shadow: 0 5px 0px #1B5E20; }
+        .btn-step:active { transform: translateY(5px); box-shadow: 0 0px 0px transparent; }
 
         /* Universal AI Chatbox */
         .chat-container {
-            margin: 40px 20px;
+            margin: 50px 20px;
             background-color: white;
-            border-radius: 25px;
-            border: 4px solid var(--paper-blue);
+            border-radius: 30px;
+            border: 5px solid var(--paper-blue);
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,176,255,0.2);
         }
-        .chat-header { background: var(--paper-blue); color: white; padding: 15px; text-align: center; margin: 0; font-size: 20px; }
-        .chat-window { height: 220px; background: var(--chat-bg); padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; font-size: 16px; font-weight: 600;}
-        .bot-msg { background: white; align-self: flex-start; border-bottom-left-radius: 5px; border: 2px solid #E0E0E0;}
-        .user-msg { background: var(--paper-blue); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
-        .chat-input-area { display: flex; padding: 10px; background: white; border-top: 2px solid #eee; }
-        .chat-input { flex: 1; border: 2px solid #ddd; border-radius: 20px; padding: 10px 15px; font-family: inherit; font-size: 16px;}
-        .chat-send { background: var(--paper-blue); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; margin-left: 8px; cursor: pointer; font-size: 18px;}
+        .chat-header { background: var(--paper-blue); color: white; padding: 15px; text-align: center; margin: 0; font-size: 22px; font-weight: 800; }
+        .chat-window { height: 250px; background: var(--chat-bg); padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .chat-msg { padding: 12px 18px; border-radius: 25px; max-width: 85%; font-size: 17px; font-weight: 700;}
+        .bot-msg { background: white; align-self: flex-start; border-bottom-left-radius: 5px; border: 3px solid #E0E0E0; color: #444;}
+        .user-msg { background: var(--paper-blue); color: white; align-self: flex-end; border-bottom-right-radius: 5px; box-shadow: 3px 3px 0px rgba(0,0,0,0.1); }
+        .chat-input-area { display: flex; padding: 15px; background: white; border-top: 3px solid #eee; }
+        .chat-input { flex: 1; border: 3px solid #B0BEC5; border-radius: 25px; padding: 12px 20px; font-family: inherit; font-size: 18px; font-weight: 600; outline:none;}
+        .chat-input:focus { border-color: var(--paper-blue); }
+        .chat-send { background: var(--paper-blue); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; margin-left: 12px; cursor: pointer; font-size: 24px; box-shadow: 0 4px 0px #0288D1;}
+        .chat-send:active { transform: translateY(4px); box-shadow: none;}
 
         /* Contribution Box */
         .contrib-box {
-            margin: 40px 20px;
-            background: #FFF9C4;
-            padding: 25px;
-            border-radius: 25px;
-            border: 4px dashed var(--primary);
+            margin: 50px 20px;
+            background: #FFF59D;
+            padding: 30px;
+            border-radius: 30px;
+            border: 5px dashed var(--primary);
             text-align: center;
+            box-shadow: 0 10px 0px rgba(255,109,0,0.2);
         }
-        .input-field { width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #FFE082; border-radius: 15px; font-family: inherit; font-size: 16px; box-sizing: border-box; }
+        .input-field { width: 100%; padding: 18px; margin-bottom: 15px; border: 3px solid #FFD54F; border-radius: 20px; font-family: inherit; font-size: 18px; font-weight: 700; box-sizing: border-box; outline: none; }
+        .input-field:focus { border-color: var(--primary); background: #fff; }
     </style>
 </head>
 <body>
@@ -199,7 +236,7 @@
     </div>
 
     <div class="content">
-        <h2 class="quest-title">Look around you! 🌴<span>What nature treasures can you find?</span></h2>
+        <h2 class="quest-title" style="color: var(--secondary);">Look around you! 🌴<span>What nature treasures can you find?</span></h2>
         
         <div class="grid">
             <div class="card" onclick="selectItem('rocket', 'nature', this)"><div class="card-emoji">🚀</div><div class="card-title">Ola Rocket</div></div>
@@ -209,25 +246,29 @@
             <div class="card" onclick="selectItem('mango', 'nature', this)"><div class="card-emoji">🥭</div><div class="card-title">Mango Toot</div></div>
             <div class="card" onclick="selectItem('shell', 'nature', this)"><div class="card-emoji">🥥</div><div class="card-title">Nut Shoes</div></div>
         </div>
-        <button class="btn-main" onclick="startBuilding('nature')">Let's Build! 🛠️</button>
+        <button class="btn-main" style="background:var(--secondary); border-color:#1B5E20; color:white;" onclick="startBuilding('nature')">Let's Build! 🛠️</button>
 
-        <h2 class="quest-title">Got some old paper? 📄<span>Let's recycle it into fun!</span></h2>
+        <h2 class="quest-title" style="color: var(--paper-blue);">Got some old paper? 📄<span>Let's recycle it into fun!</span></h2>
         <div class="grid">
             <div class="card" onclick="selectItem('boat', 'paper', this)"><div class="card-emoji">⛵</div><div class="card-title">Paper Boat</div></div>
             <div class="card" onclick="selectItem('plane', 'paper', this)"><div class="card-emoji">✈️</div><div class="card-title">Paper Plane</div></div>
             <div class="card" onclick="selectItem('frog', 'paper', this)"><div class="card-emoji">🐸</div><div class="card-title">Jumping Frog</div></div>
             <div class="card" onclick="selectItem('flower', 'paper', this)"><div class="card-emoji">🌸</div><div class="card-title">Magic Flower</div></div>
         </div>
-        <button class="btn-main" style="background:#00BCD4; border-color:#00838F; color:white;" onclick="startBuilding('paper')">Let's Fold! ✂️</button>
+        <button class="btn-main" style="background:var(--paper-blue); border-color:#0288D1; color:white;" onclick="startBuilding('paper')">Let's Fold! ✂️</button>
 
         <div id="result-section">
             <div class="eco-badge">🌍 Planet Hero Quest!</div>
-            <h2 id="toy-title" style="margin-top:15px; font-size: 28px; color: #2E7D32;">Toy Name</h2>
+            <h2 id="toy-title" style="margin-top:20px; font-size: 32px; color: var(--text-dark); text-shadow: 2px 2px 0px rgba(0,0,0,0.1);">Toy Name</h2>
+            
             <div class="step-box">
-                <div id="step-img" class="step-img-tag"></div>
-                <div id="step-text" style="font-size:22px; font-weight: 700; color:#333; margin-bottom:10px">Step 1</div>
-                <p id="step-ask" style="color:var(--primary); font-size: 18px; font-weight:bold;"></p>
+                <div class="step-img-container">
+                    <img id="step-img-display" class="step-img" src="image_0.png" alt="Step Illustration">
+                </div>
+                <div id="step-text" style="font-size:24px; font-weight: 800; color:#333; margin-bottom:15px">Step 1</div>
+                <p id="step-ask" style="color:var(--primary); font-size: 20px; font-weight:800;"></p>
             </div>
+            
             <div class="step-nav">
                 <button class="btn-step btn-prev" onclick="prevStep()">← Back</button>
                 <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">I did it! Next →</button>
@@ -246,12 +287,12 @@
         </div>
 
         <div class="contrib-box">
-            <h3 style="font-size: 22px; margin-top:0;">💡 Invented a new toy?</h3>
-            <p style="font-weight: 600; color:#555;">Tell us so other kids can build it!</p>
+            <h3 style="font-size: 24px; margin-top:0; color: var(--primary);">💡 Invented a new toy?</h3>
+            <p style="font-weight: 700; color:#666; font-size: 18px;">Tell us so other kids can build it!</p>
             <input type="text" id="cName" class="input-field" placeholder="What is your name?">
             <input type="text" id="cToy" class="input-field" placeholder="Name of your awesome toy?">
-            <textarea id="cIdea" class="input-field" placeholder="How do you make it?" style="height:90px;"></textarea>
-            <button class="btn-main" style="width:100%; margin:10px 0 0 0;" onclick="submitIdea()">Send Idea 💌</button>
+            <textarea id="cIdea" class="input-field" placeholder="How do you make it?" style="height:100px; resize: none;"></textarea>
+            <button class="btn-main" style="width:100%; margin:20px 0 0 0; background: var(--primary); border-color: #E65100; color: white;" onclick="submitIdea()">Send Idea 💌</button>
         </div>
     </div>
 </div>
@@ -263,92 +304,81 @@
     let userScore = 0; 
     let activeSteps = [];
 
+    // Database with Image positioning classes
+    // 'pos-nature-supplies' (Top Left)
+    // 'pos-nature-play' (Top Right)
+    // 'pos-paper-supplies' (Bottom Left)
+    // 'pos-paper-play' (Bottom Right)
+
     const db = {
-        // --- NEW NATURE TOYS ---
+        // --- NATURE TOYS ---
         'rocket': { title: "Ola Rocket 🚀", steps: [
-            { text: "Find one long, green coconut leaf.", img: "[Diagram: A single, long green coconut leaf held by a child]", ask: "Got your super fuel leaf? 🌴" },
-            { text: "Carefully tear a small strip from the bottom end.", img: "[Diagram: Hands tearing a small 2-inch strip from the base of the leaf]", ask: "Is it torn just a little bit? 🤏" },
-            { text: "Wrap the torn part around your pointer finger like a ring!", img: "[Diagram: The leaf wedge hooked securely around a child's index finger]", ask: "Is it resting on your finger? ☝️" },
-            { text: "Pull the long part back tight, and let it go to launch!", img: "[Diagram: Child pulling the leaf back like a slingshot and it flying into the sky]", ask: "Did it reach the stars? 🌟" }
+            { text: "Find one long, green coconut leaf.", imgClass: "pos-nature-supplies", ask: "Got your super fuel leaf? 🌴" },
+            { text: "Carefully tear a small strip from the bottom end.", imgClass: "pos-nature-supplies", ask: "Is it torn just a little bit? 🤏" },
+            { text: "Wrap the torn part around your pointer finger like a ring!", imgClass: "pos-nature-play", ask: "Is it resting on your finger? ☝️" },
+            { text: "Pull the long part back tight, and let it go to launch!", imgClass: "pos-nature-play", ask: "Did it reach the stars? 🌟" }
         ]},
         'glasses': { title: "Ola Shades 😎", steps: [
-            { text: "Grab a nice, long green coconut leaf!", img: "[Diagram: A single green coconut leaf]", ask: "Got your leaf ready? 🌿" },
-            { text: "Loop the leaf to make two round circles for your eyes.", img: "[Diagram: Bending the leaf into two circles side-by-side like binoculars]", ask: "Do you have two eye holes? 👀" },
-            { text: "Use the tiny leaf stick to pin the circles together so they stay.", img: "[Diagram: A tiny coconut stick acting like a pin holding the circles]", ask: "Are they pinned tight? 📌" },
-            { text: "Fold two straight pieces back for the arms and try them on!", img: "[Diagram: A cool kid wearing the leaf sunglasses smiling]", ask: "Looking super cool? 😎" }
+            { text: "Grab a nice, long green coconut leaf!", imgClass: "pos-nature-supplies", ask: "Got your leaf ready? 🌿" },
+            { text: "Loop the leaf to make two round circles for your eyes.", imgClass: "pos-nature-supplies", ask: "Do you have two eye holes? 👀" },
+            { text: "Use the tiny leaf stick to pin the circles together.", imgClass: "pos-nature-supplies", ask: "Are they pinned tight? 📌" },
+            { text: "Fold two straight pieces back for arms and try them on!", imgClass: "pos-nature-play", ask: "Looking super cool? 😎" }
         ]},
-        
-        // --- EXISTING NATURE TOYS ---
         'snake': { title: "Ola Snake 🐍", steps: [
-            { text: "Take two long green leaf strips.", img: "[Diagram: Two long coconut leaf strips lying flat]", ask: "Got the strips? 🌿" },
-            { text: "Cross them at the bottom like the letter 'L'.", img: "[Diagram: Strips crossed at a 90-degree angle]", ask: "Are they crossed? 📐" },
-            { text: "Fold the bottom strip over the top one. Keep zigzagging!", img: "[Diagram: Hands folding one leaf over the other in a square pattern]", ask: "Is it getting thicker? 🔁" },
-            { text: "Hold the tail and pull the head—watch it snap!", img: "[Diagram: The zigzag leaf stretching out like a springy snake]", ask: "Did it bite? 🐍" }
+            { text: "Take two long green leaf strips.", imgClass: "pos-nature-supplies", ask: "Got the strips? 🌿" },
+            { text: "Cross them at the bottom like the letter 'L'.", imgClass: "pos-nature-supplies", ask: "Are they crossed? 📐" },
+            { text: "Fold bottom strip over top. Keep zigzagging!", imgClass: "pos-nature-supplies", ask: "Is it getting thicker? 🔁" },
+            { text: "Hold the tail and pull the head—watch it snap!", imgClass: "pos-nature-play", ask: "Did it bite? 🐍" }
         ]},
         'leaf': { title: "Leaf Whistle 🎵", steps: [
-            { text: "Find a fresh green leaf.", img: "[Diagram: A single green leaf]", ask: "Got your leaf? 🌿" },
-            { text: "Roll it tightly into a cone shape.", img: "[Diagram: Rolling the leaf into a tiny ice cream cone]", ask: "Is it a tight roll? 🍦" },
-            { text: "Blow hard into the tiny end!", img: "[Diagram: Child blowing into the pointed end of the whistle]", ask: "Did it toot? 🎶" }
+            { text: "Find a fresh green leaf.", imgClass: "pos-nature-supplies", ask: "Got your leaf? 🌿" },
+            { text: "Roll it tightly into a cone shape.", imgClass: "pos-nature-supplies", ask: "Is it a tight roll? 🍦" },
+            { text: "Blow hard into the tiny end!", imgClass: "pos-nature-play", ask: "Did it toot? 🎶" }
         ]},
         'mango': { title: "Mango Toot 🥭", steps: [
-            { text: "Eat a sweet mango and clean the hairy seed.", img: "[Diagram: A clean mango seed]", ask: "Is it super clean? 🥭" },
-            { text: "Rub the sides flat on a rough stone.", img: "[Diagram: Child rubbing the seed on a flat rock]", ask: "Is it flat enough to open? 🪨" },
-            { text: "Carefully scrape out the soft part inside.", img: "[Diagram: Scraping the inside of the seed to make it hollow]", ask: "Is it empty inside? 🤏" },
-            { text: "Blow across the top like a bottle to make music!", img: "[Diagram: Blowing across the opening of the seed]", ask: "Hear the loud whistle? 🎶" }
+            { text: "Clean a hairy mango seed and rub it flat on a rock.", imgClass: "pos-nature-supplies", ask: "Is it clean and flat? 🪨" },
+            { text: "Carefully scrape out the soft part inside.", imgClass: "pos-nature-supplies", ask: "Is it empty inside? 🤏" },
+            { text: "Blow across the top like a bottle to make music!", imgClass: "pos-nature-play", ask: "Hear the loud whistle? 🎶" }
         ]},
         'shell': { title: "Nut Shoes 🥥", steps: [
-            { text: "Get two empty, clean coconut shells.", img: "[Diagram: Two half-cut coconut shells facing down]", ask: "Got your natural shoes? 🥥" },
-            { text: "Ask an adult to poke a small hole in the top center.", img: "[Diagram: A hole being drilled in the top of the shell]", ask: "Holes all done? 🕳️" },
-            { text: "Put a strong rope through and tie a big knot inside.", img: "[Diagram: Threading thick rope through the hole and knotting it]", ask: "Is the knot tight? 🧵" },
-            { text: "Hold the ropes, stand on the shells, and walk tall!", img: "[Diagram: A child walking on the coconut shells holding the ropes]", ask: "Are you walking like a giant? 🎪" }
+            { text: "Get two empty, clean coconut shells.", imgClass: "pos-nature-supplies", ask: "Got your natural shoes? 🥥" },
+            { text: "Ask an adult to poke holes and tie ropes.", imgClass: "pos-nature-supplies", ask: "Ropes tied tight? 🧵" },
+            { text: "Hold the ropes, stand on the shells, and walk tall!", imgClass: "pos-nature-play", ask: "Are you walking like a giant? 🎪" }
         ]},
 
         // --- ORIGAMI TOYS ---
         'boat': { title: "Paper Boat ⛵", steps: [
-            { text: "Fold a rectangle paper in half top-to-bottom.", img: "[Diagram: Paper folded in half hamburger style]", ask: "Is it folded? 📄" },
-            { text: "Fold the top corners into the middle to make a roof.", img: "[Diagram: Corners folded down to look like a triangle roof house]", ask: "Looks like a house? 🏠" },
-            { text: "Fold the bottom flaps up like a sailor hat.", img: "[Diagram: Bottom edges folded up over the triangle]", ask: "Got your hat? 🎩" },
-            { text: "Open the hat, squash it into a square, and pull the sides out!", img: "[Diagram: Pulling the edges apart to pop the boat open]", ask: "Is it ready to sail? ⛵" }
+            { text: "Fold paper in half, then fold corners to middle to make a roof.", imgClass: "pos-paper-supplies", ask: "Looks like a house? 🏠" },
+            { text: "Fold bottom flaps up to make a hat.", imgClass: "pos-paper-supplies", ask: "Got your hat? 🎩" },
+            { text: "Open hat, squash to square, pull sides to pop the boat!", imgClass: "pos-paper-play", ask: "Is it ready to sail? ⛵" }
         ]},
         'plane': { title: "Paper Plane ✈️", steps: [
-            { text: "Fold a paper in half longways, then open it.", img: "[Diagram: Paper with a crease down the middle]", ask: "Got the line in the middle? 📏" },
-            { text: "Fold the top two corners into the middle line.", img: "[Diagram: Top corners folded to make a pointy top]", ask: "Is it pointy? 📐" },
-            { text: "Fold it in half, then fold the wings down on both sides.", img: "[Diagram: Folding the paper in half and peeling wings back]", ask: "Wings ready? 🦅" },
-            { text: "Hold the bottom and throw it gently!", img: "[Diagram: Plane flying through the air with action lines]", ask: "Did it fly far? ☁️" }
+            { text: "Fold paper in half longways, open, then fold top corners in.", imgClass: "pos-paper-supplies", ask: "Is it pointy? 📐" },
+            { text: "Fold it in half again, then fold the wings down.", imgClass: "pos-paper-supplies", ask: "Wings ready? 🦅" },
+            { text: "Hold the bottom and throw it gently!", imgClass: "pos-paper-play", ask: "Did it fly far? ☁️" }
         ]},
         'frog': { title: "Jumping Frog 🐸", steps: [
-            { text: "Start with a square piece of paper and fold a triangle at the top.", img: "[Diagram: Square paper with a triangle folded at the top edge]", ask: "Got your triangle? 🔺" },
-            { text: "Fold the sides into the middle.", img: "[Diagram: Sides folded inward to make a narrow body]", ask: "Is the body skinny? 📏" },
-            { text: "Fold the bottom up, and fold it back down to make a bouncy spring.", img: "[Diagram: Z-fold at the bottom of the frog to act as a spring]", ask: "Is the spring ready? 🦘" },
-            { text: "Push down on his back and watch him hop!", img: "[Diagram: Finger pushing the frog's back and the frog jumping]", ask: "Did he jump high? 🐸" }
+            { text: "Fold paper into a triangle and fold legs on sides.", imgClass: "pos-paper-supplies", ask: "Got legs? 🐸" },
+            { text: "Fold a zigzag spring at the back end.", imgClass: "pos-paper-supplies", ask: "Is the spring bouncy? 🦘" },
+            { text: "Push down on his back and watch him hop!", imgClass: "pos-paper-play", ask: "Did he jump high? ⬆️" }
         ]},
-        // --- NEW ORIGAMI TOY ---
         'flower': { title: "Magic Flower 🌸", steps: [
-            { text: "Start with a colorful square piece of paper.", img: "[Diagram: A bright pink square piece of paper]", ask: "Got your favorite color? 🎨" },
-            { text: "Fold it in half both ways to make a plus sign (+) crease.", img: "[Diagram: Square paper showing cross creases in the middle]", ask: "See the plus sign? ➕" },
-            { text: "Fold all four corners directly into the middle dot.", img: "[Diagram: All four corners folded in to make a smaller square envelope]", ask: "Looks like an envelope? ✉️" },
-            { text: "Pinch the bottom gently and puff out the petals to make it bloom!", img: "[Diagram: Paper blooming into a 3D flower shape]", ask: "Did your flower bloom? 🌸" }
+            { text: "Start with a colorful square paper.", imgClass: "pos-paper-supplies", ask: "Got your favorite color? 🎨" },
+            { text: "Fold all four corners into the middle dot.", imgClass: "pos-paper-supplies", ask: "Looks like an envelope? ✉️" },
+            { text: "Pinch the bottom gently to puff out the petals!", imgClass: "pos-paper-play", ask: "Did it bloom? 🌸" }
         ]}
     };
 
     function selectItem(item, cat, el) {
         selectedItem = item; 
         selectedCategory = cat;
-        // Reset all selections
         document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
-        // Highlight the correct one with bouncy effect
         el.classList.add(cat === 'nature' ? 'selected-nature' : 'selected-paper');
     }
 
     function startBuilding(cat) {
-        if (!selectedItem) { 
-            alert("Oops! Tap on a toy picture first! ✨"); 
-            return; 
-        }
-        if (selectedCategory !== cat) {
-            alert("Pick a toy from the section you clicked! 🔍");
-            return;
-        }
+        if (!selectedItem) { alert("Oops! Tap on a toy picture first! ✨"); return; }
+        if (selectedCategory !== cat) { alert("Pick a toy from the correct section! 🔍"); return; }
         
         activeSteps = db[selectedItem].steps; 
         currentStep = 0;
@@ -364,8 +394,18 @@
     function showStep() {
         const s = activeSteps[currentStep];
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
-        document.getElementById("step-img").innerText = s.img;
         document.getElementById("step-ask").innerText = s.ask;
+        
+        // Update Image Position based on step type
+        const imgDisplay = document.getElementById("step-img-display");
+        // Reset classes
+        imgDisplay.className = "step-img"; 
+        // Add correct position class based on data
+        if (s.imgClass === 'pos-nature-supplies') imgDisplay.classList.add('img-pos-nature-supplies');
+        if (s.imgClass === 'pos-nature-play') imgDisplay.classList.add('img-pos-nature-play');
+        if (s.imgClass === 'pos-paper-supplies') imgDisplay.classList.add('img-pos-paper-supplies');
+        if (s.imgClass === 'pos-paper-play') imgDisplay.classList.add('img-pos-paper-play');
+
         document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "🎉 Finish Quest!" : "I did it! Next →";
     }
 
@@ -381,21 +421,15 @@
             document.getElementById("result-section").style.display = "none";
             selectedItem = ""; 
             document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
-    function prevStep() { 
-        if (currentStep > 0) { 
-            currentStep--; 
-            showStep(); 
-        } 
-    }
+    function prevStep() { if (currentStep > 0) { currentStep--; showStep(); } }
 
     function submitIdea() { 
         alert("Wow! Your idea was sent! You're a true inventor! 🌟"); 
-        document.getElementById("cName").value = "";
-        document.getElementById("cToy").value = "";
-        document.getElementById("cIdea").value = "";
+        document.getElementById("cName").value = ""; document.getElementById("cToy").value = ""; document.getElementById("cIdea").value = "";
     }
 
     // CHATBOT LOGIC
@@ -404,22 +438,13 @@
         let input = document.getElementById("chatInput");
         let text = input.value.trim();
         if(!text) return;
-        
         let win = document.getElementById("chatWindow");
-        let uDiv = document.createElement("div");
-        uDiv.className = "chat-msg user-msg";
-        uDiv.innerText = text;
-        win.appendChild(uDiv);
-        input.value = "";
-        win.scrollTop = win.scrollHeight;
-
+        let uDiv = document.createElement("div"); uDiv.className = "chat-msg user-msg"; uDiv.innerText = text;
+        win.appendChild(uDiv); input.value = ""; win.scrollTop = win.scrollHeight;
         setTimeout(() => {
             let reply = getBotReply(text.toLowerCase());
-            let bDiv = document.createElement("div");
-            bDiv.className = "chat-msg bot-msg";
-            bDiv.innerText = reply;
-            win.appendChild(bDiv);
-            win.scrollTop = win.scrollHeight;
+            let bDiv = document.createElement("div"); bDiv.className = "chat-msg bot-msg"; bDiv.innerText = reply;
+            win.appendChild(bDiv); win.scrollTop = win.scrollHeight;
         }, 600);
     }
 
