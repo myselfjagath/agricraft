@@ -5,27 +5,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EcoPlay | Fun with Nature!</title>
+<link href="" rel="stylesheet">
 <style>
-/* Kid-Friendly Bright Theme /
 :root {
---bg-color: #87CEEB; / Sky blue /
+--bg-color: #87CEEB;
 --card-bg: #FFFFFF;
---primary: #FF9800; / Fun Orange /
+--primary: #FF9800;
 --text-dark: #333333;
---accent: #FFEB3B; / Bright Yellow /
+--accent: #FFEB3B;
 --green: #4CAF50;
+--chat-bg: #E3F2FD;
 }
 body {
-font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+font-family: 'Fredoka', sans-serif;
 background-color: var(--bg-color);
 margin: 0;
 display: flex;
 justify-content: center;
+color: var(--text-dark);
 }
 .app-container {
 width: 100%;
 max-width: 420px;
-background-color: #F0F8FF; / Alice Blue /
+background-color: #F0F8FF;
 min-height: 100vh;
 box-shadow: 0 0 25px rgba(0,0,0,0.2);
 overflow-x: hidden;
@@ -43,24 +45,24 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .header h1 {
 margin: 0;
-font-size: 32px;
+font-size: 36px;
 text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+letter-spacing: 1px;
 }
 .header p {
 margin: 10px 0 0 0;
 font-size: 18px;
-font-weight: bold;
+font-weight: 600;
 }
 .content {
 padding: 20px;
 }
 h2 {
-color: var(--text-dark);
-font-size: 22px;
+font-size: 24px;
 text-align: center;
 margin-bottom: 20px;
+color: #2c3e50;
 }
-/ Bouncy Grid Cards /
 .grid {
 display: grid;
 grid-template-columns: 1fr 1fr;
@@ -86,15 +88,13 @@ background-color: #FFF3E0;
 box-shadow: 0 6px 0px var(--primary);
 }
 .card-emoji {
-font-size: 50px;
+font-size: 55px;
 margin-bottom: 10px;
 }
 .card-title {
-font-weight: bold;
-color: var(--text-dark);
-font-size: 16px;
+font-weight: 600;
+font-size: 18px;
 }
-/ Big Playful Button /
 .btn {
 display: block;
 width: 100%;
@@ -103,19 +103,17 @@ color: var(--text-dark);
 border: 4px solid #FBC02D;
 padding: 18px;
 border-radius: 40px;
-font-size: 20px;
-font-weight: bold;
+font-size: 22px;
+font-weight: 600;
 margin-top: 30px;
 cursor: pointer;
 box-shadow: 0 6px 0px #FBC02D;
-transition: all 0.1s;
 font-family: inherit;
 }
 .btn:active {
 transform: translateY(6px);
 box-shadow: 0 0px 0px #FBC02D;
 }
-/ Results Section /
 #result-section {
 display: none;
 margin-top: 30px;
@@ -123,11 +121,6 @@ background: white;
 padding: 25px 15px;
 border-radius: 25px;
 border: 4px solid var(--green);
-animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-@keyframes popIn {
-0% { transform: scale(0.8); opacity: 0; }
-100% { transform: scale(1); opacity: 1; }
 }
 .eco-badge {
 background-color: var(--green);
@@ -135,12 +128,11 @@ color: white;
 padding: 8px 15px;
 border-radius: 25px;
 font-size: 16px;
-font-weight: bold;
+font-weight: 600;
 display: block;
 text-align: center;
 margin-bottom: 15px;
 }
-/ The Visual Diagram Steps */
 .step-container {
 display: flex;
 flex-direction: column;
@@ -170,12 +162,12 @@ font-size: 18px;
 flex-shrink: 0;
 }
 .step-icon {
-font-size: 40px;
+font-size: 35px;
 margin: 0 15px;
 flex-shrink: 0;
 }
 .step-text {
-font-size: 16px;
+font-size: 18px;
 color: #444;
 line-height: 1.4;
 }
