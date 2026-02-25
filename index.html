@@ -50,7 +50,7 @@
         .header {
             background-color: var(--primary);
             color: white;
-            padding: 40px 20px 30px;
+            padding: 45px 20px 30px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
@@ -60,17 +60,11 @@
         .quest-title {
             font-size: 24px;
             text-align: center;
-            margin: 30px 10px 15px;
+            margin: 30px 20px 15px;
             color: #2c3e50;
             font-weight: 600;
-            line-height: 1.2;
         }
-        .quest-title span {
-            display: block;
-            font-size: 16px;
-            color: #555;
-            margin-top: 5px;
-        }
+        .quest-title span { display: block; font-size: 16px; color: #555; margin-top: 5px; }
 
         .grid {
             display: grid;
@@ -124,44 +118,39 @@
             border-radius: 20px;
             margin: 15px 0;
         }
-        .step-img-tag {
-            background: #eee;
-            color: #777;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-        .step-nav {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .btn-step {
-            flex: 1;
-            padding: 12px;
-            border-radius: 20px;
-            border: none;
-            font-family: inherit;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        .step-img-tag { background: #eee; color: #777; padding: 10px; font-size: 14px; border-radius: 10px; margin-bottom: 15px; font-style: italic; }
+        .step-nav { display: flex; justify-content: space-between; gap: 10px; }
+        .btn-step { flex: 1; padding: 12px; border-radius: 20px; border: none; font-family: inherit; font-weight: bold; cursor: pointer; }
         .btn-next { background: var(--green); color: white; }
 
-        /* Chatbox */
+        /* Universal AI Chatbox */
         .chat-container {
             margin: 40px 20px;
             background-color: white;
             border-radius: 25px;
             border: 4px solid var(--paper-blue);
             overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
         .chat-header { background: var(--paper-blue); color: white; padding: 15px; text-align: center; margin: 0; }
-        .chat-window { height: 200px; background: var(--chat-bg); padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; }
-        .bot-msg { background: white; align-self: flex-start; }
-        .user-msg { background: var(--primary); color: white; align-self: flex-end; }
+        .chat-window { height: 220px; background: var(--chat-bg); padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .chat-msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; font-size: 15px; }
+        .bot-msg { background: white; align-self: flex-start; border-bottom-left-radius: 5px; }
+        .user-msg { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
+        .chat-input-area { display: flex; padding: 10px; background: white; border-top: 1px solid #eee; }
+        .chat-input { flex: 1; border: 2px solid #ddd; border-radius: 20px; padding: 8px 15px; font-family: inherit; }
+        .chat-send { background: var(--paper-blue); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; margin-left: 8px; cursor: pointer; }
+
+        /* Contribution Box */
+        .contrib-box {
+            margin: 40px 20px;
+            background: #FFF9C4;
+            padding: 25px;
+            border-radius: 25px;
+            border: 3px dashed var(--primary);
+            text-align: center;
+        }
+        .input-field { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #FFE082; border-radius: 12px; font-family: inherit; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -178,16 +167,16 @@
         <h2 class="quest-title">Look around you! 🌲<span>What can you find on the ground?</span></h2>
         
         <div class="grid">
-            <div class="card" onclick="selectItem('leaf', 'nature', this)"><div class="card-emoji">🌿</div><div>Leaf</div></div>
+            <div class="card" onclick="selectItem('leaf', 'nature', this)"><div class="card-emoji">🌿</div><div>Leaf Whistle</div></div>
             <div class="card" onclick="selectItem('snake', 'nature', this)"><div class="card-emoji">🐍</div><div>Ola Snake</div></div>
-            <div class="card" onclick="selectItem('shell', 'nature', this)"><div class="card-emoji">🥥</div><div>Coconut</div></div>
             <div class="card" onclick="selectItem('mango', 'nature', this)"><div class="card-emoji">🥭</div><div>Mango Seed</div></div>
+            <div class="card" onclick="selectItem('shell', 'nature', this)"><div class="card-emoji">🥥</div><div>Nut Shoes</div></div>
         </div>
         <button class="btn-main" onclick="startBuilding('nature')">Let's Build! 🚀</button>
 
-        <h2 class="quest-title">Got some old paper? 📄<span>Let's recycle it into fun!</span></h2>
+        <h2 class="quest-title">Got some old paper? 📄<span>Let's recycle it!</span></h2>
         <div class="grid">
-            <div class="card" onclick="selectItem('boat', 'paper', this)"><div class="card-emoji">⛵</div><div>Boat</div></div>
+            <div class="card" onclick="selectItem('boat', 'paper', this)"><div class="card-emoji">⛵</div><div>Paper Boat</div></div>
             <div class="card" onclick="selectItem('frog', 'paper', this)"><div class="card-emoji">🐸</div><div>Jumping Frog</div></div>
         </div>
         <button class="btn-main" style="background:#00BCD4; border-color:#0097A7; color:white;" onclick="startBuilding('paper')">Let's Fold! ✂️</button>
@@ -195,13 +184,11 @@
         <div id="result-section">
             <div class="eco-badge">🌍 Planet Hero Quest!</div>
             <h2 id="toy-title" style="margin-top:10px">Toy Name</h2>
-            
             <div class="step-box">
                 <div id="step-img" class="step-img-tag"></div>
-                <div id="step-text" style="font-size:20px; margin-bottom:10px">Step 1: ...</div>
+                <div id="step-text" style="font-size:20px; margin-bottom:10px">Step 1</div>
                 <p id="step-ask" style="color:var(--green); font-weight:bold;"></p>
             </div>
-
             <div class="step-nav">
                 <button class="btn-step" style="background:#ddd" onclick="prevStep()">Back</button>
                 <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">I did it! Next →</button>
@@ -209,42 +196,51 @@
         </div>
 
         <div class="chat-container">
-            <h3 class="chat-header">🤖 Need help? Ask EcoBot!</h3>
+            <h3 class="chat-header">🤖 Ask EcoBot Anything!</h3>
             <div class="chat-window" id="chatWindow">
-                <div class="chat-msg bot-msg">Pick an item to start your quest! 🍃</div>
+                <div class="chat-msg bot-msg">Hi! I'm EcoBot. I can tell rhymes, answer questions, or help with your toys!</div>
             </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Ask me something..." onkeypress="handleKey(event)">
+                <button class="chat-send" onclick="sendMsg()">▶</button>
+            </div>
+        </div>
+
+        <div class="contrib-box">
+            <h3>💡 Invented a Toy?</h3>
+            <p>Tell us so other kids can build it!</p>
+            <input type="text" id="cName" class="input-field" placeholder="Your Name">
+            <input type="text" id="cToy" class="input-field" placeholder="Toy Name">
+            <textarea id="cIdea" class="input-field" placeholder="How do you make it?" style="height:80px;"></textarea>
+            <button class="btn-main" style="width:100%; margin:10px 0 0 0;" onclick="submitIdea()">Submit Idea 💌</button>
         </div>
     </div>
 </div>
 
 <script>
-    let currentStep = 0;
-    let selectedItem = "";
-    let selectedCategory = "";
-    let userScore = 0;
-    let activeSteps = [];
+    let currentStep = 0; let selectedItem = ""; let selectedCategory = ""; let userScore = 0; let activeSteps = [];
 
     const db = {
         'leaf': { title: "Leaf Whistle", steps: [
-            { text: "Find a fresh green leaf.", img: "", ask: "Got your leaf? 🌿" },
-            { text: "Roll it tightly like a small tube.", img: "", ask: "Is it a tight roll? 🍦" },
-            { text: "Blow into the end to make a sound!", img: "", ask: "Did it make a sound? 🎶" }
+            { text: "Find a fresh green leaf.", img: "[Diagram: A single green leaf]", ask: "Got your leaf? 🌿" },
+            { text: "Roll it tightly like a tube.", img: "[Diagram: Rolling leaf into a tube]", ask: "Is it a tight roll? 🍦" },
+            { text: "Blow into the end!", img: "[Diagram: Child blowing whistle]", ask: "Did it toot? 🎶" }
         ]},
         'snake': { title: "Ola Snake", steps: [
-            { text: "Take two long strips of coconut leaf.", img: "", ask: "Got the strips? 🌿" },
-            { text: "Cross them at the bottom like an 'L'.", img: "", ask: "Are they crossed? 📐" },
-            { text: "Fold the bottom strip over the top one. Repeat!", img: "", ask: "Doing the zigzag? 🔁" },
-            { text: "Pull the ends to watch it snap!", img: "", ask: "Does it snap? 🐍" }
+            { text: "Take two long leaf strips.", img: "[Diagram: Two long leaf strips]", ask: "Got the strips? 🌿" },
+            { text: "Cross them like an 'L'.", img: "[Diagram: Strips crossed at 90 deg]", ask: "Are they crossed? 📐" },
+            { text: "Zig-zag fold them to the end.", img: "[Diagram: Zig-zag folding steps]", ask: "Almost there? 🔁" },
+            { text: "Pull it to snap!", img: "[Diagram: Stretching the snake]", ask: "Does it snap? 🐍" }
         ]},
         'frog': { title: "Jumping Frog", steps: [
-            { text: "Fold a square paper into a triangle.", img: "", ask: "Is it a triangle now? 🔺" },
-            { text: "Fold the sides to make legs.", img: "", ask: "Does it have legs? 🐸" },
-            { text: "Fold the bottom back to make a spring.", img: "", ask: "Ready to jump? 🦘" }
+            { text: "Fold paper into a triangle.", img: "[Diagram: Triangle fold]", ask: "Done? 🔺" },
+            { text: "Fold legs out.", img: "[Diagram: Leg folding]", ask: "Got legs? 🐸" },
+            { text: "Fold a spring at the back.", img: "[Diagram: Spring fold]", ask: "Ready to jump? 🦘" }
         ]},
         'boat': { title: "Paper Boat", steps: [
-            { text: "Fold your paper in half.", img: "", ask: "Done? 📄" },
-            { text: "Fold the corners to the middle to make a roof.", img: "", ask: "Looks like a house? 🏠" },
-            { text: "Open it up and pop the boat out!", img: "", ask: "Is it floating? ⛵" }
+            { text: "Fold paper in half.", img: "[Diagram: Half fold]", ask: "Done? 📄" },
+            { text: "Fold corners to center.", img: "[Diagram: Triangle roof fold]", ask: "Looks like a house? 🏠" },
+            { text: "Pop the boat open!", img: "[Diagram: Opening the boat]", ask: "Is it floating? ⛵" }
         ]}
     };
 
@@ -255,9 +251,8 @@
     }
 
     function startBuilding(cat) {
-        if (!selectedItem || selectedCategory !== cat) { alert("Pick an item first! ✨"); return; }
-        activeSteps = db[selectedItem].steps;
-        currentStep = 0;
+        if (!selectedItem || selectedCategory !== cat) { alert("Pick a toy first! ✨"); return; }
+        activeSteps = db[selectedItem].steps; currentStep = 0;
         document.getElementById("toy-title").innerText = db[selectedItem].title;
         showStep();
         document.getElementById("result-section").style.display = "block";
@@ -269,25 +264,49 @@
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
         document.getElementById("step-img").innerText = s.img;
         document.getElementById("step-ask").innerText = s.ask;
-        document.getElementById("nextBtn").innerText = currentStep === activeSteps.length - 1 ? "Finish Quest! ✨" : "I did it! Next →";
+        document.getElementById("nextBtn").innerText = currentStep === activeSteps.length - 1 ? "Finish Quest! ✨" : "Done! Next →";
     }
 
     function nextStep() {
-        if (currentStep < activeSteps.length - 1) {
-            currentStep++; showStep();
-        } else {
-            userScore += 50;
-            document.getElementById("scoreDisplay").innerText = "⭐ " + userScore;
-            alert("Quest Complete! You earned 50 Stars! ⭐");
-            document.getElementById("result-section").style.display = "none";
-        }
+        if (currentStep < activeSteps.length - 1) { currentStep++; showStep(); } 
+        else { userScore += 50; document.getElementById("scoreDisplay").innerText = "⭐ " + userScore; alert("50 Stars Earned! ⭐"); document.getElementById("result-section").style.display = "none"; }
     }
 
     function prevStep() { if (currentStep > 0) { currentStep--; showStep(); } }
 
-    function sendMessage() {
-        let text = document.getElementById("chatInput").value;
-        // Basic chat logic...
+    function submitIdea() { alert("Idea sent! You're a true inventor! 🌟"); }
+
+    // UNIVERSAL AI CHATBOT LOGIC
+    function handleKey(e) { if(e.key === 'Enter') sendMsg(); }
+    function sendMsg() {
+        let input = document.getElementById("chatInput");
+        let text = input.value.trim();
+        if(!text) return;
+        
+        let win = document.getElementById("chatWindow");
+        let uDiv = document.createElement("div");
+        uDiv.className = "chat-msg user-msg";
+        uDiv.innerText = text;
+        win.appendChild(uDiv);
+        input.value = "";
+        win.scrollTop = win.scrollHeight;
+
+        setTimeout(() => {
+            let reply = getBotReply(text.toLowerCase());
+            let bDiv = document.createElement("div");
+            bDiv.className = "chat-msg bot-msg";
+            bDiv.innerText = reply;
+            win.appendChild(bDiv);
+            win.scrollTop = win.scrollHeight;
+        }, 800);
+    }
+
+    function getBotReply(t) {
+        if(t.includes("prime minister")) return "The Prime Minister of India is Shri Narendra Modi. He leads the country from New Delhi! 🇮🇳";
+        if(t.includes("rhyme")) return "Okay! Here's one: 'Nature is green, the sky is blue, I love the Earth, and so should you!' 🌳✨";
+        if(t.includes("joke")) return "Why did the tree go to the dentist? To get a root canal! 😂";
+        if(t.includes("hello") || t.includes("hi")) return "Hello friend! Ask me anything about India, nature, or rhymes!";
+        return "That's interesting! I'm still learning, but you can ask me about the PM, rhymes, or how to build toys! 🤔";
     }
 </script>
 </body>
