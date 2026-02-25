@@ -1,191 +1,515 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcoPlay | Fun with Nature!</title>
-<link href="" rel="stylesheet">
-<style>
-:root {
---bg-color: #87CEEB;
---card-bg: #FFFFFF;
---primary: #FF9800;
---text-dark: #333333;
---accent: #FFEB3B;
---green: #4CAF50;
---chat-bg: #E3F2FD;
-}
-body {
-font-family: 'Fredoka', sans-serif;
-background-color: var(--bg-color);
-margin: 0;
-display: flex;
-justify-content: center;
-color: var(--text-dark);
-}
-.app-container {
-width: 100%;
-max-width: 420px;
-background-color: #F0F8FF;
-min-height: 100vh;
-box-shadow: 0 0 25px rgba(0,0,0,0.2);
-overflow-x: hidden;
-border-radius: 0 0 30px 30px;
-padding-bottom: 30px;
-}
-.header {
-background-color: var(--primary);
-color: white;
-padding: 25px 20px;
-text-align: center;
-border-bottom-left-radius: 40px;
-border-bottom-right-radius: 40px;
-box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-.header h1 {
-margin: 0;
-font-size: 36px;
-text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-letter-spacing: 1px;
-}
-.header p {
-margin: 10px 0 0 0;
-font-size: 18px;
-font-weight: 600;
-}
-.content {
-padding: 20px;
-}
-h2 {
-font-size: 24px;
-text-align: center;
-margin-bottom: 20px;
-color: #2c3e50;
-}
-.grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 15px;
-}
-.card {
-background: var(--card-bg);
-border-radius: 20px;
-padding: 20px 10px;
-text-align: center;
-cursor: pointer;
-box-shadow: 0 6px 0px #D3D3D3;
-transition: transform 0.1s, box-shadow 0.1s;
-border: 3px solid transparent;
-}
-.card:active {
-transform: translateY(6px);
-box-shadow: 0 0px 0px #D3D3D3;
-}
-.card.selected {
-border-color: var(--primary);
-background-color: #FFF3E0;
-box-shadow: 0 6px 0px var(--primary);
-}
-.card-emoji {
-font-size: 55px;
-margin-bottom: 10px;
-}
-.card-title {
-font-weight: 600;
-font-size: 18px;
-}
-.btn {
-display: block;
-width: 100%;
-background-color: var(--accent);
-color: var(--text-dark);
-border: 4px solid #FBC02D;
-padding: 18px;
-border-radius: 40px;
-font-size: 22px;
-font-weight: 600;
-margin-top: 30px;
-cursor: pointer;
-box-shadow: 0 6px 0px #FBC02D;
-font-family: inherit;
-}
-.btn:active {
-transform: translateY(6px);
-box-shadow: 0 0px 0px #FBC02D;
-}
-#result-section {
-display: none;
-margin-top: 30px;
-background: white;
-padding: 25px 15px;
-border-radius: 25px;
-border: 4px solid var(--green);
-}
-.eco-badge {
-background-color: var(--green);
-color: white;
-padding: 8px 15px;
-border-radius: 25px;
-font-size: 16px;
-font-weight: 600;
-display: block;
-text-align: center;
-margin-bottom: 15px;
-}
-.step-container {
-display: flex;
-flex-direction: column;
-gap: 15px;
-margin-top: 20px;
-}
-.step-card {
-background: #F9F9F9;
-border-radius: 15px;
-padding: 15px;
-display: flex;
-align-items: center;
-box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-border-left: 5px solid var(--primary);
-}
-.step-number {
-background: var(--primary);
-color: white;
-width: 30px;
-height: 30px;
-border-radius: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
-font-weight: bold;
-font-size: 18px;
-flex-shrink: 0;
-}
-.step-icon {
-font-size: 35px;
-margin: 0 15px;
-flex-shrink: 0;
-}
-.step-text {
-font-size: 18px;
-color: #444;
-line-height: 1.4;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPlay | Fun with Nature!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #87CEEB; /* Sky blue */
+            --card-bg: #FFFFFF;
+            --primary: #FF9800; /* Fun Orange */
+            --text-dark: #333333;
+            --accent: #FFEB3B; /* Bright Yellow */
+            --green: #4CAF50;
+            --chat-bg: #E3F2FD;
+        }
+        body {
+            font-family: 'Fredoka', sans-serif; 
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            color: var(--text-dark);
+        }
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: #F0F8FF; 
+            min-height: 100vh;
+            box-shadow: 0 0 25px rgba(0,0,0,0.2);
+            overflow-x: hidden;
+            border-radius: 0 0 30px 30px;
+            padding-bottom: 30px;
+        }
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 20px;
+        }
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 6px 0px #D3D3D3;
+            transition: transform 0.1s, box-shadow 0.1s;
+            border: 3px solid transparent;
+        }
+        .card:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0px #D3D3D3;
+        }
+        .card.selected {
+            border-color: var(--primary);
+            background-color: #FFF3E0;
+            box-shadow: 0 6px 0px var(--primary);
+        }
+        .card-emoji {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent);
+            color: var(--text-dark);
+            border: 4px solid #FBC02D;
+            padding: 18px;
+            border-radius: 40px;
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 0px #FBC02D;
+            font-family: inherit;
+        }
+        .btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0px #FBC02D;
+        }
+        #result-section {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            padding: 25px 15px;
+            border-radius: 25px;
+            border: 4px solid var(--green);
+        }
+        .eco-badge {
+            background-color: var(--green);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .step-card {
+            background: #F9F9F9;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .step-icon {
+            font-size: 35px;
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+        .step-text {
+            font-size: 18px;
+            color: #444;
+            line-height: 1.4;
+        }
 
+        /* AI Chatbox Styles */
+        .chat-container {
+            margin-top: 40px;
+            background-color: white;
+            border-radius: 25px;
+            border: 4px solid #00BCD4;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .chat-header {
+            background-color: #00BCD4;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+        .chat-window {
+            height: 200px;
+            background-color: var(--chat-bg);
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-msg {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        .bot-msg {
+            background-color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .user-msg {
+            background-color: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background-color: white;
+            border-top: 2px solid #EEE;
+        }
+        .chat-input {
+            flex-grow: 1;
+            border: 2px solid #CCC;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+        }
+        .chat-input:focus {
+            border-color: #00BCD4;
+        }
+        .chat-btn {
+            background-color: #00BCD4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Idea Box Styles */
+        .idea-box {
+            margin-top: 40px;
+            background-color: #FFF9C4; 
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px dashed #FBC02D;
+            text-align: center;
+        }
+        .idea-box h3 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #FFE082;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .input-field:focus {
+            border-color: var(--primary);
+        }
+        textarea.input-field {
+            height: 80px;
+            resize: none;
+        }
+        .btn-small {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 0px #E65100;
+            font-family: inherit;
+        }
+        .btn-small:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0px #E65100;
+        }
+    </style>
 </head>
 <body>
 
 <div class="app-container">
-<div class="header">
-<h1>✨ EcoPlay ✨</h1>
-<p>Make toys from nature!</p>
-</div>
+    <div class="header">
+        <h1>✨ EcoPlay ✨</h1>
+        <p>Make toys from nature!</p>
+    </div>
 
+    <div class="content">
+        <h2>Pick what you found! 👇</h2>
+        
+        <div class="grid">
+            <div class="card" onclick="selectMaterial('leaf', this)">
+                <div class="card-emoji">🌿</div>
+                <div class="card-title">Green Leaf</div>
+            </div>
+            <div class="card" onclick="selectMaterial('shell', this)">
+                <div class="card-emoji">🥥</div>
+                <div class="card-title">Coconut Shell</div>
+            </div>
+            <div class="card" onclick="selectMaterial('sheath', this)">
+                <div class="card-emoji">🍂</div>
+                <div class="card-title">Dry Leaf (Paala)</div>
+            </div>
+            <div class="card" onclick="selectMaterial('seed', this)">
+                <div class="card-emoji">🌰</div>
+                <div class="card-title">Hard Seed</div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="generateToy()">Let's Build It! 🚀</button>
+
+        <div id="result-section">
+            <div class="eco-badge" id="eco-impact">🌍 You saved the Earth!</div>
+            <h2 id="toy-title">Toy Name</h2>
+            <div class="step-container" id="toy-steps"></div>
+        </div>
+
+        <div class="chat-container">
+            <h3 class="chat-header">🤖 Ask EcoBot!</h3>
+            <div class="chat-window" id="chatWindow">
+                <div class="chat-msg bot-msg">Hi! I am EcoBot. Ask me why plastic is bad, or why trees are awesome! 🍃</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Type here..." onkeypress="handleKeyPress(event)">
+                <button class="chat-btn" onclick="sendMessage()">▶</button>
+            </div>
+        </div>
+
+        <div class="idea-box">
+            <h3>💡 Know another toy? Tell us!</h3>
+            <input type="text" id="userName" class="input-field" placeholder="What is your name?">
+            <input type="text" id="toyName" class="input-field" placeholder="What is the toy called?">
+            <textarea id="toyIdea" class="input-field" placeholder="How do you make it?"></textarea>
+            <button class="btn-small" onclick="sendIdea()">Send Idea 💌</button>
+        </div>
+
+    </div>
 </div>
 
 <script>
-let selectedMaterial = "";
+    let selectedMaterial = "";
 
+    const toyDatabase = {
+        'leaf': {
+            title: "Leaf Whistle! 🎵",
+            impact: "🌟 No plastic used!",
+            steps: [
+                { text: "Find a green coconut leaf.", icon: "🌿" },
+                { text: "Take off the hard stick in the middle.", icon: "🦯" },
+                { text: "Roll it up like an ice cream cone!", icon: "🍦" },
+                { text: "Pin it with a tiny piece of the stick so it stays.", icon: "📌" },
+                { text: "Blow hard into the small end to make a sound!", icon: "💨" }
+            ]
+        },
+        'shell': {
+            title: "Coconut Shoes! 🎪",
+            impact: "🌟 No plastic used!",
+            steps: [
+                { text: "Get two clean coconut shells.", icon: "🥥" },
+                { text: "Poke a hole in the top of each one.", icon: "🕳️" },
+                { text: "Put a strong rope through the holes.", icon: "🧵" },
+                { text: "Tie a big knot inside so the rope stays.", icon: "🪢" },
+                { text: "Stand on the shells, hold the ropes, and walk!", icon: "🚶‍♂️" }
+            ]
+        },
+        'sheath': {
+            title: "Leaf Sled! 🛷",
+            impact: "🌟 No plastic used!",
+            steps: [
+                { text: "Find a big, dry leaf called a Paala.", icon: "🍂" },
+                { text: "Wipe it clean with a cloth.", icon: "🧽" },
+                { text: "Sit cross-legged inside the big bowl part.", icon: "🧘‍♂️" },
+                { text: "Ask a friend to pull the handle and run!", icon: "🏃‍♀️" }
+            ]
+        },
+        'seed': {
+            title: "Spinning Top! 🌪️",
+            impact: "🌟 No plastic used!",
+            steps: [
+                { text: "Find a hard rubber seed.", icon: "🌰" },
+                { text: "Rub the bottom on a rock to make it smooth.", icon: "🪨" },
+                { text: "Poke a small hole right in the top.", icon: "🎯" },
+                { text: "Push a small, strong stick into the hole.", icon: "🥢" },
+                { text: "Twist the stick hard and watch it spin!", icon: "🌀" }
+            ]
+        }
+    };
+
+    function selectMaterial(material, element) {
+        selectedMaterial = material;
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => card.classList.remove('selected'));
+        element.classList.add('selected');
+    }
+
+    function generateToy() {
+        if (selectedMaterial === "") {
+            alert("Oops! Pick a material first! 👆");
+            return;
+        }
+
+        let toyData = toyDatabase[selectedMaterial];
+
+        document.getElementById("toy-title").innerText = toyData.title;
+        document.getElementById("eco-impact").innerText = toyData.impact;
+
+        let stepsContainer = document.getElementById("toy-steps");
+        stepsContainer.innerHTML = ""; 
+        
+        toyData.steps.forEach((step, index) => {
+            let stepCard = document.createElement("div");
+            stepCard.className = "step-card";
+            stepCard.innerHTML = `
+                <div class="step-number">${index + 1}</div>
+                <div class="step-icon">${step.icon}</div>
+                <div class="step-text">${step.text}</div>
+            `;
+            stepsContainer.appendChild(stepCard);
+        });
+
+        document.getElementById("result-section").style.display = "block";
+        window.scrollBy({ top: 400, behavior: 'smooth' });
+    }
+
+    function sendIdea() {
+        let name = document.getElementById("userName").value;
+        let toy = document.getElementById("toyName").value;
+        let idea = document.getElementById("toyIdea").value;
+
+        if(toy === "" || idea === "") {
+            alert("Please tell us the name of the toy and how to make it! 🥺");
+            return;
+        }
+        if(name === "") { name = "Friend"; }
+
+        alert("Yay! Thank you, " + name + "! We will read your idea for the " + toy + " soon! 🎉");
+
+        document.getElementById("userName").value = "";
+        document.getElementById("toyName").value = "";
+        document.getElementById("toyIdea").value = "";
+    }
+
+    // AI Chatbox Functions (Simulated)
+    function handleKeyPress(e) {
+        if(e.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function sendMessage() {
+        let inputField = document.getElementById("chatInput");
+        let text = inputField.value.trim();
+        if(text === "") return;
+
+        let chatWindow = document.getElementById("chatWindow");
+
+        let userDiv = document.createElement("div");
+        userDiv.className = "chat-msg user-msg";
+        userDiv.innerText = text;
+        chatWindow.appendChild(userDiv);
+        
+        inputField.value = "";
+        chatWindow.scrollTop = chatWindow.scrollHeight; 
+
+        setTimeout(() => {
+            let botReply = getBotResponse(text.toLowerCase());
+            let botDiv = document.createElement("div");
+            botDiv.className = "chat-msg bot-msg";
+            botDiv.innerText = botReply;
+            chatWindow.appendChild(botDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }, 800);
+    }
+
+    function getBotResponse(text) {
+        if(text.includes("plastic") || text.includes("pollution")) {
+            return "Plastic is tough because it takes hundreds of years to break down! Building toys from leaves helps keep our beautiful Earth clean. 🌍";
+        }
+        if(text.includes("tree") || text.includes("leaf") || text.includes("nature")) {
+            return "Trees are superheroes! They give us fresh air, cool shade, and fun things to play with. Always pick leaves that have fallen to the ground so we don't hurt the tree! 🌳";
+        }
+        if(text.includes("make") || text.includes("how") || text.includes("build")) {
+            return "Just tap one of the pictures at the top, like the Coconut Shell, and hit the big yellow button. I will show you exactly how to build it! ✨";
+        }
+        if(text.includes("hello") || text.includes("hi")) {
+            return "Hello there! I am ready to learn and play! 🌻";
+        }
+        return "That is a brilliant question! Nature is full of mysteries. Try building a toy first while I think about the answer! 🤔";
+    }
 </script>
 
 </body>
