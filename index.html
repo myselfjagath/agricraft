@@ -439,9 +439,17 @@
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
         document.getElementById("step-ask").innerText = s.ask;
         
-        // Inject Emoji and Motivational Text
-        document.getElementById("step-emoji").innerText = s.emoji;
-        document.getElementById("step-motivation").innerText = s.motivation;
+        // Inject Emoji and Motivational Text directly into the text elements
+        // We removed the <img> tag logic entirely since we are using emojis
+        const emojiContainer = document.getElementById("step-emoji");
+        if (emojiContainer) {
+             emojiContainer.innerText = s.emoji;
+        }
+
+        const motivationContainer = document.getElementById("step-motivation");
+        if (motivationContainer) {
+             motivationContainer.innerText = s.motivation;
+        }
 
         document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "🎉 Finish Quest!" : "I did it! Next →";
     }
