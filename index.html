@@ -57,7 +57,7 @@
         /* HIGH CONTRAST HEADER - ALIGNED & STRAIGHT */
         .header {
             background-color: var(--secondary);
-            padding: 70px 20px 35px; /* Increased top padding to avoid badge overlap */
+            padding: 70px 20px 35px; 
             text-align: center;
             border-bottom: var(--outline);
             border-bottom-left-radius: 40px;
@@ -174,7 +174,7 @@
             margin: 25px 0;
         }
         
-        /* NEW MOTIVATION UI BOX */
+        /* MOTIVATION UI BOX */
         .step-motivation-box { 
             width: 100%;
             background: #E8F5E9;
@@ -204,6 +204,11 @@
         .btn-prev { background: #E0E0E0; color: #000; box-shadow: 4px 4px 0px #000; }
         .btn-next { background: var(--accent); color: #000; box-shadow: 4px 4px 0px #000; }
         .btn-step:active { transform: translate(4px, 4px); box-shadow: 0 0px 0px #000; }
+
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         /* Universal AI Chatbox */
         .chat-container {
@@ -277,7 +282,7 @@
             
             <div id="toy-benefit">🌍 Earth-Hero Fact: ...</div>
             
-            <div class="step-box">
+            <div class="step-box" id="step-box-ui">
                 <div class="step-motivation-box">
                     <div id="step-emoji" class="step-emoji">⭐</div>
                     <div id="step-motivation" class="step-motivation-text">Awesome job!</div>
@@ -286,9 +291,23 @@
                 <p id="step-ask" style="color:var(--primary); font-size: 22px; font-weight:800;"></p>
             </div>
             
-            <div class="step-nav">
+            <div class="step-nav" id="step-nav-ui">
                 <button class="btn-step btn-prev" onclick="prevStep()">← Back</button>
                 <button class="btn-step btn-next" id="nextBtn" onclick="nextStep()">I did it! Next →</button>
+            </div>
+
+            <div id="upload-section" style="display:none; background: #E1F5FE; border: 4px dashed var(--paper-blue); padding: 25px; border-radius: 25px; margin: 25px 0;">
+                <h3 style="font-size: 26px; color: #000; margin-top:0;">📸 Show Off Your Toy!</h3>
+                <p style="font-weight: 800; color: #444; font-size: 18px;">Take a picture of your awesome creation to verify your build and earn your 50 Stars!</p>
+                
+                <label class="btn-main" style="background: #FFEB3B; color: #000; font-size: 22px; padding: 15px; margin: 15px auto; width: 85%; display: block; cursor: pointer;">
+                    📷 Open Camera
+                    <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleMockUpload()">
+                </label>
+
+                <div id="mock-preview" style="display: none; font-size: 60px; margin: 15px 0; animation: pop 0.3s ease;">🖼️✅</div>
+                
+                <button id="claim-stars-btn" class="btn-main" style="display: none; width: 100%; margin: 15px 0 0 0; background: var(--accent);" onclick="finishAndClaim()">🌟 Claim 50 Stars!</button>
             </div>
         </div>
 
@@ -421,6 +440,13 @@
         if (!selectedItem) { alert("Oops! Tap on a toy picture first! ✨"); return; }
         if (selectedCategory !== cat) { alert("Pick a toy from the correct section! 🔍"); return; }
         
+        // Reset Views
+        document.getElementById("step-box-ui").style.display = "block";
+        document.getElementById("step-nav-ui").style.display = "flex";
+        document.getElementById("upload-section").style.display = "none";
+        document.getElementById("mock-preview").style.display = "none";
+        document.getElementById("claim-stars-btn").style.display = "none";
+
         activeSteps = db[selectedItem].steps; 
         currentStep = 0;
         document.getElementById("toy-title").innerText = db[selectedItem].title;
@@ -439,17 +465,12 @@
         document.getElementById("step-text").innerText = `Step ${currentStep + 1}: ${s.text}`;
         document.getElementById("step-ask").innerText = s.ask;
         
-        // Inject Emoji and Motivational Text directly into the text elements
-        // We removed the <img> tag logic entirely since we are using emojis
+        // Inject Emoji and Motivational Text safely
         const emojiContainer = document.getElementById("step-emoji");
-        if (emojiContainer) {
-             emojiContainer.innerText = s.emoji;
-        }
+        if (emojiContainer) emojiContainer.innerText = s.emoji;
 
         const motivationContainer = document.getElementById("step-motivation");
-        if (motivationContainer) {
-             motivationContainer.innerText = s.motivation;
-        }
+        if (motivationContainer) motivationContainer.innerText = s.motivation;
 
         document.getElementById("nextBtn").innerText = (currentStep === activeSteps.length - 1) ? "🎉 Finish Quest!" : "I did it! Next →";
     }
@@ -460,17 +481,33 @@
             showStep(); 
         } 
         else { 
-            userScore += 50; 
-            document.getElementById("scoreDisplay").innerText = "⭐ " + userScore; 
-            alert("Amazing job! 50 Stars Earned! You are a Planet Hero! 🌍✨"); 
-            document.getElementById("result-section").style.display = "none";
-            selectedItem = ""; 
-            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // SHOW THE MOCK CAMERA UPLOAD SCREEN INSTEAD OF FINISHING
+            document.getElementById("step-box-ui").style.display = "none";
+            document.getElementById("step-nav-ui").style.display = "none";
+            document.getElementById("upload-section").style.display = "block";
         }
     }
 
     function prevStep() { if (currentStep > 0) { currentStep--; showStep(); } }
+
+    // NEW LOGIC FOR THE MOCK CAMERA
+    function handleMockUpload() {
+        // Once the user "takes a picture", show the preview checkmark and the claim button
+        document.getElementById("mock-preview").style.display = "block";
+        document.getElementById("claim-stars-btn").style.display = "block";
+    }
+
+    function finishAndClaim() {
+        userScore += 50; 
+        document.getElementById("scoreDisplay").innerText = "⭐ " + userScore; 
+        alert("Amazing job! Your photo has been verified. 50 Stars Earned! You are a Planet Hero! 🌍✨"); 
+        
+        // Reset everything back to the main menu
+        document.getElementById("result-section").style.display = "none";
+        selectedItem = ""; 
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-nature', 'selected-paper'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     function submitIdea() { 
         alert("Wow! Your idea was sent! You're a true inventor! 🌟"); 
